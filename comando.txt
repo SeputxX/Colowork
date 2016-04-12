@@ -1,0 +1,4 @@
+git status
+git add *
+git commit ( esc :wq enter )
+git push -u origin master
