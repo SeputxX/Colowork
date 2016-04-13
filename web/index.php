@@ -18,6 +18,7 @@ session_start();
      'verEmpresa' => array('controller' =>'Controller', 'action' =>'verEmpresa'),
      'verPerfil' => array('controller' =>'Controller', 'action' =>'verPerfil'),
      'crearOferta' => array('controller' =>'Controller', 'action' =>'crearOferta'),
+     'verOfertas' => array('controller' =>'Controller', 'action' =>'verOfertas'),
      'verwiki' => array('controller' =>'Controller', 'action' =>'wiki'),
  );
 

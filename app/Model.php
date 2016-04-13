@@ -151,6 +151,17 @@ class Model {
        return $row;
 
       }
+      public function getNombreEmpresa($id){
+
+        $query="SELECT nombre FROM col_empresas where idempresa=$id";
+
+       $result = mysql_query($query, $this->conexion);
+
+       $row = mysql_fetch_assoc($result)['nombre'];        
+
+       return $row;
+
+      }
       public function dameContratos(){
 
         $query="SELECT nombre FROM col_contratos";
@@ -185,5 +196,53 @@ class Model {
         }
           return $salarios;
 
-      }      
+      }
+      public function insertarOferta($t,$d,$u,$c,$j,$s,$ide) {
+
+         $t = htmlspecialchars($t);
+         $d = htmlspecialchars($d);
+         $u = htmlspecialchars($u);         
+         $c = htmlspecialchars($c);
+         $j = htmlspecialchars($j);
+         $s = htmlspecialchars($s);
+         $ide = htmlspecialchars($ide);
+
+          $query= "INSERT INTO `col_ofertas`(`titulo`, `descripcion`, `ubicacion`, `contrato`, `jornada`, `salario`, `idempresa`)
+          VALUES ('$t','$d','$u','$c','$j','$s','$ide')";
+          $result = mysql_query($query, $this->conexion);
+
+          return $result;
+         
+      }   
+      public function todasOfertas(){
+
+       $query="SELECT * FROM col_ofertas";
+
+       $result = mysql_query($query, $this->conexion);
+
+       $ofertas = array();
+         while ($row = mysql_fetch_assoc($result))
+         {
+             $ofertas[] = $row;
+         }
+
+       return $ofertas;
+
+      }
+
+      public function buscarOfertas($buscar){
+
+       $query="SELECT * FROM col_ofertas WHERE titulo LIKE '%".$buscar."%' OR ubicacion LIKE '%".$buscar."%' OR descripcion LIKE '%".$buscar."%' OR contrato LIKE '%".$buscar."%' OR jornada LIKE '%".$buscar."%' ";
+
+       $result = mysql_query($query, $this->conexion);
+
+       $ofertas = array();
+         while ($row = mysql_fetch_assoc($result))
+         {
+             $ofertas[] = $row;
+         }
+
+       return $ofertas;
+
+      }
 }

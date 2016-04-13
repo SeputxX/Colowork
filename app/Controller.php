@@ -207,7 +207,8 @@ class Controller{
              'salario' => '',
              'opccontrato'=> $m->dameContratos(),
              'opcjornada'=> $m->dameJornadas(),
-             'opcSalarios'=> $m->dameSalarios()
+             'opcsalario'=> $m->dameSalarios(),
+             'idempresa'=> $m->getIdEmpresa($_SESSION['user'])
          );        
 
          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -218,7 +219,8 @@ class Controller{
                     $_POST['ubicacion'], 
                     $_POST['contrato'], 
                     $_POST['jornada'],
-                    $_POST['salario']                                     
+                    $_POST['salario'],
+                    $_POST['idempresa']                                     
                     )){
             //header('Location: index.php?ctl=listarEmpresas');
             }else{
@@ -236,6 +238,47 @@ class Controller{
 
 
         require __DIR__ . '/templates/crearOferta.php';
+     }
+
+     public function verOfertas(){
+
+        $m = new Model(Config::$pro_bd_nombre, Config::$pro_bd_usuario,
+                     Config::$pro_bd_clave, Config::$pro_bd_hostname);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $buscar=$_POST['buscar'];
+
+            $of=$m->buscarOfertas($buscar);
+            $ofertas=array();
+            foreach ($of as $oferta) :
+                $idempresa=$oferta['idempresa'];
+                $nombreEmpresa=$m->getNombreEmpresa($idempresa);
+                $oferta['nombreEmp']=$nombreEmpresa;
+                $ofertas[]=$oferta;
+            endforeach; 
+
+            $params = array(
+                 'ofertas' => $ofertas
+             );
+
+        }else{
+            
+            $of=$m->todasOfertas();
+            $ofertas=array();
+            foreach ($of as $oferta) :
+                $idempresa=$oferta['idempresa'];
+                $nombreEmpresa=$m->getNombreEmpresa($idempresa);
+                $oferta['nombreEmp']=$nombreEmpresa;
+                $ofertas[]=$oferta;
+            endforeach; 
+
+            $params = array(
+                 'ofertas' => $ofertas
+             );
+        }
+
+        require __DIR__ . '/templates/verOfertas.php';
      }
 
 

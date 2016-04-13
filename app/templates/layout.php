@@ -29,7 +29,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li><a href="index.php?ctl=listarEmpresas">Empresas</a></li>
-              <li><a href="index.php?ctl=buscar">buscar por nombre</a></li>
+              <li><a href="index.php?ctl=verOfertas">Ver Ofertas</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <form class="navbar-form navbar-left" role="search">

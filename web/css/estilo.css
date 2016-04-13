@@ -17,6 +17,14 @@
 .actividad{
   width: 156px !important;
 }
+.busofe{
+
+}
+.ofertas{
+  width: 60%;
+  margin: auto;
+  min-width: 200px;
+}
 .login{
   width: 25% !important;
   overflow: hidden;
