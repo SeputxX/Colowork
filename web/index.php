@@ -1,4 +1,5 @@
 <?php
+session_start(); 
  // web/index.php
 
  // carga del modelo y los controladores
@@ -9,10 +10,14 @@
  // enrutamiento
  $map = array(
      'inicio' => array('controller' =>'Controller', 'action' =>'inicio'),
+     'login' => array('controller' =>'Controller', 'action' =>'login'),
+     'logout' => array('controller' =>'Controller', 'action' =>'logout'),
      'regEmpresa' => array('controller' =>'Controller', 'action' =>'regEmpresa'),
      'listarEmpresas' => array('controller' =>'Controller', 'action' =>'listarEmpresas'),
-     'buscar' => array('controller' =>'Controller', 'action' =>'buscarPorNombre'),
-     'ver' => array('controller' =>'Controller', 'action' =>'ver'),
+     'insertarEmpresa' => array('controller' =>'Controller', 'action' =>'insertarEmpresa'),
+     'verEmpresa' => array('controller' =>'Controller', 'action' =>'verEmpresa'),
+     'verPerfil' => array('controller' =>'Controller', 'action' =>'verPerfil'),
+     'crearOferta' => array('controller' =>'Controller', 'action' =>'crearOferta'),
      'verwiki' => array('controller' =>'Controller', 'action' =>'wiki'),
  );
 

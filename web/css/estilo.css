@@ -1,6 +1,6 @@
 #contenido {
   width: 90%;
-  text-align: center;
+  /*text-align: center;*/
   font-family: Georgia, "Times New Roman",
         Times, serif;
   color: purple;
@@ -12,6 +12,35 @@
   -moz-border-radius: 8px 8px 8px 8px;
   -webkit-border-radius: 8px 8px 8px 8px;
   border: 0px solid #000000;
+   overflow: hidden;
+}
+.actividad{
+  width: 156px !important;
+}
+.login{
+  width: 25% !important;
+  overflow: hidden;
+  min-width: 200px;
+}
+.login button{
+  width: 40%;
+  margin: auto;
+  margin-top: 10px;
+  min-width: 100px;
+}
+.endOfe{
+  border-bottom: 1px solid black;
+}
+.empresa{
+  width: 100%;
+}
+table{
+  border: 1px solid black;
+}
+.divider{
+ list-style: none;
+ float: left;
+ padding-right: 20px;
 }
 
 .logo{

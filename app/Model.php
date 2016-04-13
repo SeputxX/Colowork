@@ -19,18 +19,49 @@ class Model {
 
   }
 
+  public function login($user,$pass){
+
+    $query="SELECT count(*) AS coin FROM col_usuarios where user='$user' AND pass='$pass';";
+
+    $result = mysql_query($query, $this->conexion);
+    $row = mysql_fetch_assoc($result);
+
+    return $row['coin'];
+
+  }
+  public function datosUsuario($user){
+    $query="SELECT iduser,rol FROM col_usuarios WHERE user='$user';";
+
+    $result = mysql_query($query, $this->conexion);
+    $row = mysql_fetch_assoc($result);
+
+    return $row;
+  }
+
   public function dameEmpresas(){
-      $sql = "select * from empresas order by nombre asc";
+      $sql = "select * from col_empresas order by nombre asc";
 
       $result = mysql_query($sql, $this->conexion);
 
       $empresas = array();
+      $solu=array();
       while ($row = mysql_fetch_assoc($result)){
         $empresas[] = $row;
       }
-      return $empresas;
+      foreach ($empresas as $empresa) :
+
+        $count = $empresa['idempresa'];
+        $sql2 = "SELECT count(*) as numofe from col_ofertas WHERE idempresa=$count";
+        $result2 = mysql_query($sql2, $this->conexion);
+        $row2 = mysql_fetch_assoc($result2);
+        $empresa['numofe']=$row2['numofe'];
+        $solu[]=$empresa;
+      endforeach;
+    
+      return $solu;
   }
-  public function insertarEmpresa($n, $a, $idf, $r, $d, $p, $pais, $pro, $cod, $tel, $fax){
+  public function insertarEmpresa($n, $a, $idf, $r, $d, $p, $pais, $pro, $cod, $tel, $fax,$user,$pass,$rol){
+    
          $n = htmlspecialchars($n);
          $a = htmlspecialchars($a);
          $idf = htmlspecialchars($idf);         
@@ -42,11 +73,117 @@ class Model {
          $cod = htmlspecialchars($cod);
          $tel = htmlspecialchars($tel);
          $fax = htmlspecialchars($fax);
+         $user = htmlspecialchars($user);
+         $pass= htmlspecialchars($pass);
+         $rol=htmlspecialchars($rol);
 
-         $query= "INSERT INTO `empresas`(`nombre`, `actividad`, `idfiscal`, `razon`, `direccion`, `poblacion`, `pais`, `provincia`, `codpostal`, `telefono`, `fax`)
-         VALUES (".$n.",".$a.",".$idf.",".$r.",".$d.",".$p.",".$pais.",".$pro.",".$cod.",".$tel.",".$fax.")";
+         //echo $n." ".$a." ".$idf." ".$r." ".$d." ".$p." ".$pais." ".$pro." ".$cod." ".$tel." ".$fax." ".$user." ".$pass." ".$rol;
+
+         $query= "INSERT INTO `col_empresas`(`nombre`, `actividad`, `idfiscal`, `razon`, `direccion`, `poblacion`, `pais`, `provincia`, `codpostal`, `telefono`, `fax`,`user`)
+         VALUES ('$n','$a','$idf','$r','$d','$p','$pais','$pro',$cod,$tel,$fax,'$user')";
          $result = mysql_query($query, $this->conexion);
 
-         return $result;
+         $query1="INSERT INTO `col_usuarios`(`user`,`pass`,`rol`) VALUES('$user','$pass','$rol')";
+         $result1 = mysql_query($query1, $this->conexion);
+
+         if($result==true && $result1==true){
+          return true;
+         }else{
+          return false;
+         }
      }
+     public function validarDatos($n,$idf,$user,$rol){
+      if($rol=="empresa"){
+        $query="SELECT COUNT(*) as coin FROM `col_empresas` WHERE `nombre`='$n' OR `idfiscal`=$idf OR `user`='$user';";
+        $result = mysql_query($query, $this->conexion);
+        $fila = mysql_fetch_assoc($result);
+      }
+      return $fila['coin'];
+     }
+
+     public function dameEmpresa($id){
+
+       $query="SELECT * FROM col_empresas where idempresa=$id";
+
+       $result = mysql_query($query, $this->conexion);
+
+       $row = mysql_fetch_assoc($result);
+
+       return $row;
+
+     }
+     public function dameOfertas($id){
+
+       $query="SELECT * FROM col_ofertas where idempresa=$id";
+
+       $result = mysql_query($query, $this->conexion);
+
+       $ofertas = array();
+         while ($row = mysql_fetch_assoc($result))
+         {
+             $ofertas[] = $row;
+         }
+
+       return $ofertas;
+
+     }
+     public function dameActividades(){
+
+       $query="SELECT nombre FROM col_actividades";
+
+       $result = mysql_query($query, $this->conexion);
+       $actividades = array();
+       while ($row = mysql_fetch_assoc($result))
+         {
+             $actividades[] = $row;
+         }
+
+         return $actividades;
+     }
+      public function getIdEmpresa($user){
+
+        $query="SELECT idempresa FROM col_empresas where user='$user'";
+
+       $result = mysql_query($query, $this->conexion);
+
+       $row = mysql_fetch_assoc($result)['idempresa'];        
+
+       return $row;
+
+      }
+      public function dameContratos(){
+
+        $query="SELECT nombre FROM col_contratos";
+
+        $result = mysql_query($query, $this->conexion);
+        $contratos=array();
+        while($row = mysql_fetch_assoc($result)){
+          $contratos[]=$row;
+        }
+          return $contratos;
+      }
+      public function dameJornadas(){
+
+        $query="SELECT nombre FROM col_jornadas";
+
+        $result = mysql_query($query, $this->conexion);
+        $jornadas=array();
+        while($row = mysql_fetch_assoc($result)){
+          $jornadas[]=$row;
+        }
+          return $jornadas;
+
+      }
+      public function dameSalarios(){
+
+        $query="SELECT nombre FROM col_salarios";
+
+        $result = mysql_query($query, $this->conexion);
+        $salarios=array();
+        while($row = mysql_fetch_assoc($result)){
+          $salarios[]=$row;
+        }
+          return $salarios;
+
+      }      
 }

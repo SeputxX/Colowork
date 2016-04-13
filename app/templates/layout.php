@@ -1,7 +1,9 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <title>ColoWork</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="<?php echo 'css/'.Config::$pro_vis_css ?>" />
     <link href="../web/css/bootstrap.min.css" rel="stylesheet">
   </head>
@@ -26,7 +28,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="index.php?ctl=listar">ver alimentos</a></li>
+              <li><a href="index.php?ctl=listarEmpresas">Empresas</a></li>
               <li><a href="index.php?ctl=buscar">buscar por nombre</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -36,13 +38,25 @@
                 </div>
                 <button type="submit" class="btn btn-default">Buscar</button>
               </form>
+              <?php if(isset($_SESSION['user'])){ ?>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registro<span class="caret"></span></a>
+              <a href="index.php?ctl=login" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hola, <?php echo $_SESSION['user'] ?><span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="index.php?ctl=regEmpresa">Empresa</a></li>
-                  <li><a href="#">Alumno</a></li>
-                </ul>
+                  <li><a href="index.php?ctl=verPerfil">Ver Perfil</a></li>
+                  <li><a href="index.php?ctl=crearOferta">Crear Oferta</a></li>
+                  <li><a href="index.php?ctl=logout">Cerrar Sesion</a></li>
+                </ul>                
               </li>
+              <?php }else{ ?>
+              <li><a href="index.php?ctl=login">Login</a></li>
+              <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registro<span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a href="index.php?ctl=regEmpresa">Empresa</a></li>
+                                <li><a href="#">Alumno</a></li>
+                              </ul>
+
+              <?php } ?>
             </ul>
             </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
