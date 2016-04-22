@@ -53,6 +53,12 @@
             <th>Fax *</th><td><input type="text" name="fax" value="<?php echo $params['fax'] ?>" pattern="([\(\+])?([0-9]{1,3}([\s])?)?([\+|\(|\-|\)|\s])?([0-9]{2,4})([\-|\)|\.|\s]([\s])?)?([0-9]{2,4})?([\.|\-|\s])?([0-9]{4,8}" required/></td><td class="requisitos"> (Solo Numeros. Obligatorio 9. Si no tiene 00000000)</td>
         </tr>
         <tr>
+            <th>Correo: </th>
+            <td>
+                <input type="text" name="correo" value="<?php echo $params['correo'] ?>" pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" required/>(example@loquesea.algo)
+            </td>
+        </tr>
+        <tr>
            <td></td><td><input type="hidden" name="rol" value="empresa"/></td>
         </tr>
     </table>

@@ -8,15 +8,15 @@
 <table>
 	<tr>
 		<th>Titulo</th>
-		<td><input type="text" name="titulo" pattern="([a-zA-Z]|\s){2,50}" required/>(Solo letras. Max 50)</td>
+		<td><input type="text" name="titulo"  value="<?php echo $params['titulo'] ?>" pattern="([a-zA-Z]|\s){2,50}" required/>(Solo letras. Max 50)</td>
 	</tr>
 	<tr>
 		<th>Desripcion</th>
-		<td><input type="text" name="descripcion" pattern="([a-zA-Z]|\s){2,50}" required/>(Solo letras. Max 250)</td>
+		<td><textarea name="descripcion" pattern="([a-zA-Z]|\s){2,50}" required> <?php echo $params['descripcion'] ?></textarea>(Solo letras. Max 250)</td>
 	</tr>
 	<tr>
 		<th>Ubicacion</th>
-		<td><input type="text" name="ubicacion" pattern="([a-zA-Z]|\s){2,50}" required/>(Solo letras. Max 50)</td>
+		<td><input type="text" name="ubicacion" value="<?php echo $params['ubicacion'] ?>"  pattern="([a-zA-Z]|\s){2,50}" required/>(Solo letras. Max 50)</td>
 	</tr>
 	<tr>
 		<th>Contrato</th>
@@ -46,6 +46,19 @@
 	            <option value="<?php echo $salario['nombre'] ?>"><?php echo $salario['nombre'] ?></option>
 	        <?php  endforeach; ?>
         </select>
+
+		</td>
+	</tr>
+	<tr>
+		<th>Competencias exigidas</th>
+		<td >
+		<a id="desple" onclick="desplegarCompe()">Desplegar competencias</a>
+		<div id="competencias" style="display: none">
+			<?php foreach ($params['opccompe'] as $competencia) : ?> 
+	            <div class="radio"><input type="checkbox" name="competencias[]" value="<?php echo $competencia['competencia'] ?>"><?php echo $competencia['competencia'] ?></div>
+	        <?php  endforeach; ?>
+    	</div>
+    	<div class="radio" id="ocul" style="display: none"><a  onclick="ocultarCompe()" >Ocultar competencias</a><div>
 		</td>
 	</tr>
 	<tr>

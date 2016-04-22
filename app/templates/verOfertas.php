@@ -16,6 +16,8 @@
 							<h3><?php echo $oferta['titulo'] ?></h3>
 							<b><?php echo $oferta['ubicacion'] ?></b>
 							<p class="descof"><?php echo $oferta['descripcion'] ?></p>
+							<b>Competencias exigidas</b>
+							<p class="descof"><?php echo $oferta['competencias'] ?></p>
 							<ul>
 								<li class="divider"><?php echo $oferta['contrato'] ?></li>
 								<li class="divider"><?php echo $oferta['jornada'] ?></li> 

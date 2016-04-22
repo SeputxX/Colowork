@@ -1,5 +1,5 @@
 <?php ob_start() ?>
-
+<div class="empresas">
  <table>
      <tr>
          <th>Nombre</th>
@@ -22,6 +22,7 @@
      <?php endforeach; ?>
 
  </table>
+ </div>
  
 
 

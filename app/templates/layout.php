@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="<?php echo 'css/'.Config::$pro_vis_css ?>" />
     <link href="../web/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/script.js"></script>
   </head>
   <body>
     <!-- <div id="cabecera">
@@ -28,8 +29,20 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li><a href="index.php?ctl=listarEmpresas">Empresas</a></li>
-              <li><a href="index.php?ctl=verOfertas">Ver Ofertas</a></li>
+            <li><a href="index.php?ctl=listarEmpresas">Empresas</a></li>
+            <li><a href="index.php?ctl=verOfertas">Ofertas</a></li>
+            <?php if(isset($_SESSION['user'])){ ?>
+
+
+              <li><a href="index.php?ctl=verAlumnos">Alumnos</a></li>              
+
+              <?php if($_SESSION['rol']=="centro" || $_SESSION['rol']=="admin"){ ?>
+              <li><a href="index.php?ctl=verCiclos">Ciclos Formativos</a></li>
+
+              <?php } ?>
+            <?php } ?>
+
+              
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <form class="navbar-form navbar-left" role="search">
@@ -38,25 +51,51 @@
                 </div>
                 <button type="submit" class="btn btn-default">Buscar</button>
               </form>
+
               <?php if(isset($_SESSION['user'])){ ?>
+
               <li class="dropdown">
               <a href="index.php?ctl=login" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hola, <?php echo $_SESSION['user'] ?><span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="index.php?ctl=verPerfil">Ver Perfil</a></li>
-                  <li><a href="index.php?ctl=crearOferta">Crear Oferta</a></li>
+                 
+                 <?php if($_SESSION['rol']=="admin"){ ?>
+                 <li><a href="index.php?ctl=altaCentro">Alta Usuario Centro</a></li>
+                 <?php } ?>
+                 <?php if($_SESSION['rol']=="centro" || $_SESSION['rol']=="admin"){ ?>
+
+                 <li><a href="index.php?ctl=altaCiclo">Alta Ciclo Formativo</a></li>
+                 <li><a href="index.php?ctl=altaActividad">Alta Actividad</a></li>
+
+                 <?php } ?>
+
+                 <?php if($_SESSION['rol']=="empresa" && $_SESSION['ofertas']=="si"){ ?>
+
+                  <li><a href="index.php?ctl=crearOferta">Crear Oferta</a></li>                  
+
+                  <?php } ?>
+
+                  <?php if($_SESSION['rol']=="alumno"){ ?>        
+
+                  <?php } ?>
+
+                  
                   <li><a href="index.php?ctl=logout">Cerrar Sesion</a></li>
                 </ul>                
               </li>
+
               <?php }else{ ?>
+
               <li><a href="index.php?ctl=login">Login</a></li>
               <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registro<span class="caret"></span></a>
                               <ul class="dropdown-menu">
                                 <li><a href="index.php?ctl=regEmpresa">Empresa</a></li>
-                                <li><a href="#">Alumno</a></li>
+                                <li><a href="index.php?ctl=altaAlumno">Alumno</a></li>
                               </ul>
 
               <?php } ?>
+
             </ul>
             </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

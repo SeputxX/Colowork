@@ -19,7 +19,16 @@ session_start();
      'verPerfil' => array('controller' =>'Controller', 'action' =>'verPerfil'),
      'crearOferta' => array('controller' =>'Controller', 'action' =>'crearOferta'),
      'verOfertas' => array('controller' =>'Controller', 'action' =>'verOfertas'),
-     'verwiki' => array('controller' =>'Controller', 'action' =>'wiki'),
+     'altaAlumno' => array('controller' =>'Controller', 'action' =>'altaAlumno'),
+     'verAlumnos' => array('controller' =>'Controller', 'action' =>'verAlumnos'),
+     'verAlumno' => array('controller' =>'Controller', 'action' =>'verAlumno'),
+     'altaCentro' => array('controller' =>'Controller', 'action' =>'altaCentro'),
+     'altaCiclo' => array('controller' =>'Controller', 'action' =>'altaCiclo'),
+     'verCiclos' => array('controller' =>'Controller', 'action' =>'verCiclos'),
+     'activarEmpresa' => array('controller' =>'Controller', 'action' =>'activarEmpresa'),
+     'activarOferta' => array('controller' =>'Controller', 'action' =>'activarOferta'),
+     'enviarCurriculum' => array ('controller' =>'Controller', 'action'=>'enviarCurriculum'),
+     'verwiki' => array('controller' =>'Controller', 'action' =>'wiki')
  );
 
  // Parseo de la ruta

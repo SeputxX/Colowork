@@ -7,4 +7,5 @@
      static public $pro_bd_usuario  = "root";
      static public $pro_bd_clave    = "";
      static public $pro_vis_css     = "estilo.css";
+     static public $pro_vis_url     = "http://localhost/tikka/Colowork/web/index.php";
  }

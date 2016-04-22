@@ -1,6 +1,5 @@
 #contenido {
   width: 90%;
-  /*text-align: center;*/
   font-family: Georgia, "Times New Roman",
         Times, serif;
   color: purple;
@@ -12,13 +11,57 @@
   -moz-border-radius: 8px 8px 8px 8px;
   -webkit-border-radius: 8px 8px 8px 8px;
   border: 0px solid #000000;
-   overflow: hidden;
+  overflow: hidden;
 }
+.sepa{
+  border-right: 1px solid;
+  text-align: right;
+}
+.bandera{
+  width: 40px;
+  height: 20px;
+}
+textarea{
+  min-width: 500px !important;
+  min-height: 200px !important;
+}
+
+.radio{
+ width: 300px;
+ height: 120px;
+ float: left;
+ margin-top: 0px !important;
+}
+
+.perfil{
+  height: 90px;
+  width: 70px;
+}
+.curriculum td, .curriculum th{
+padding-left: 20px;
+padding-right: 10px;
+min-height: 20px;
+}
+.curriculum{
+  margin:auto;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.datos{
+max-width: 500px;
+}
+
 .actividad{
   width: 156px !important;
 }
 .busofe{
 
+}
+.menubusc{
+  width: 100%;
+  overflow: hidden;
 }
 .ofertas{
   width: 60%;
@@ -39,11 +82,34 @@
 .endOfe{
   border-bottom: 1px solid black;
 }
+.ficha{
+  width: 95%;
+  margin: auto !important;
+}
 .empresa{
   width: 100%;
 }
-table{
+.empresas{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+.empresas{
+  margin: auto !important;
+}
+/*td, th{
   border: 1px solid black;
+}*/
+.alumnos{
+overflow: hidden;
+width:96%; 
+margin:0 auto;
+}
+.alumno{
+  text-align: center;
+  margin: 10px;
+  width: 340px !important;
+  float: left;
 }
 .divider{
  list-style: none;
