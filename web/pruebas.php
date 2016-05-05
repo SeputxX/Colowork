@@ -1,42 +1,292 @@
 <?php 
- require_once __DIR__ . '/../app/Config.php';
- require_once __DIR__ . '/../app/Model.php';
- require_once __DIR__ . '/../app/Controller.php';
-$m = new Model(Config::$pro_bd_nombre, Config::$pro_bd_usuario,Config::$pro_bd_clave, Config::$pro_bd_hostname);
-
-require('fpdf.php');
-
-$pdf=new FPDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial','B',16);
-$pdf->Cell(40,10,'¡Hola, Mundo!');
-$pdf->Output();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*$m->alumnosCumpleCompe(8);*/
-/*function dameURL(){
-//$url="http://".$_SERVER['HTTP_HOST'].":".$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'];
-$url="http://".$_SERVER['HTTP_HOST'];
-return $url;
+####
+## Eliminar una imagen
+####
+if(isset($_GET['eliminar'])){
+    $archivo = $_GET['eliminar'];
+    $directorio = dirname(__FILE__);
+    if(unlink($directorio.'/'.$archivo)){
+        header("Location: cargarImagen.php?accion=eliminado");
+        exit;
+    }
+    
 }
-echo dameURL();*/
 
-/*SELECT col_competencias.nombre FROM col_alumnos JOIN col_alum_ciclo ON col_alumnos.idalumno=col_alum_ciclo.idalumno JOIN col_competencias ON col_alum_ciclo.idciclo=col_competencias.idciclo WHERE col_competencias.nombre='Realizar operaciones auxiliares de montaje de equipos microinformáticos' OR col_competencias.nombre=' Realizar operaciones auxiliares de mantenimiento de sistemas microinformáticos' OR col_competencias.nombre=' Aplicar técnicas y procedimientos relacionados con la seguridad en sistemas, servicios y aplicaciones, cumpliendo el plan de seguridad' OR col_competencias.nombre=' Desarrollar aplicaciones web con acceso a bases de datos utilizando lenguajes, objetos de acceso y herramientas de mapeo adecuados a las especificaciones' OR col_competencias.nombre=' Integrar contenidos en la lógica de una aplicación web, desarrollando componentes de acceso a datos adecuados a las especificaciones' OR col_competencias.nombre=' Reparar y ampliar el equipamiento informático'*/
+##
+## RECIBIR FORMULARIO
+## Aqui pueden ir los campos que uno quiera
+##
+
+
+if(isset($_POST['submit'])){ // comprobamos que se ha enviado el formulario
+    
+    // comprobar que han seleccionado una foto
+    if($_FILES['foto']['name'] != ""){ // El campo foto contiene una imagen...
+        
+        // Primero, hay que validar que se trata de un JPG/GIF/PNG
+        $allowedExts = array("jpg", "jpeg", "gif", "png", "JPG", "GIF", "PNG");
+        $extension = end(explode(".", $_FILES["foto"]["name"]));
+        if ((($_FILES["foto"]["type"] == "image/gif")
+                || ($_FILES["foto"]["type"] == "image/jpeg")
+                || ($_FILES["foto"]["type"] == "image/png")
+                || ($_FILES["foto"]["type"] == "image/pjpeg"))
+                && in_array($extension, $allowedExts)) {
+            // el archivo es un JPG/GIF/PNG, entonces...
+            
+            $extension = end(explode('.', $_FILES['foto']['name']));
+            $foto = substr(md5(uniqid(rand())),0,10).".".$extension;
+            $directorio = dirname(__FILE__); // directorio de tu elección
+            
+            // almacenar imagen en el servidor
+            move_uploaded_file($_FILES['foto']['tmp_name'], $directorio.'/'.$foto);
+            $minFoto = 'min_'.$foto;
+            $resFoto = 'res_'.$foto;
+            resizeImagen($directorio.'/', $foto, 65, 65,$minFoto,$extension);
+            resizeImagen($directorio.'/', $foto, 500, 500,$resFoto,$extension);
+            unlink($directorio.'/'.$foto);
+            
+        } else { // El archivo no es JPG/GIF/PNG
+            $malformato = $_FILES["foto"]["type"];
+            header("Location: cargarImagen.php?error=noFormato&formato=$malformato");
+            exit;
+          }
+        
+    } else { // El campo foto NO contiene una imagen
+        header("Location: cargarImagen.php?error=noImagen");
+        exit;
+    }
+        
+} // fin del submit
+
+####
+## Función para redimencionar las imágenes
+## utilizando las liberías de GD de PHP
+####
+
+function resizeImagen($ruta, $nombre, $alto, $ancho,$nombreN,$extension){
+    $rutaImagenOriginal = $ruta.$nombre;
+    if($extension == 'GIF' || $extension == 'gif'){
+    $img_original = imagecreatefromgif($rutaImagenOriginal);
+    }
+    if($extension == 'jpg' || $extension == 'JPG'){
+    $img_original = imagecreatefromjpeg($rutaImagenOriginal);
+    }
+    if($extension == 'png' || $extension == 'PNG'){
+    $img_original = imagecreatefrompng($rutaImagenOriginal);
+    }
+    $max_ancho = $ancho;
+    $max_alto = $alto;
+    list($ancho,$alto)=getimagesize($rutaImagenOriginal);
+    $x_ratio = $max_ancho / $ancho;
+    $y_ratio = $max_alto / $alto;
+    if( ($ancho <= $max_ancho) && ($alto <= $max_alto) ){//Si ancho 
+    $ancho_final = $ancho;
+    $alto_final = $alto;
+  } elseif (($x_ratio * $alto) < $max_alto){
+    $alto_final = ceil($x_ratio * $alto);
+    $ancho_final = $max_ancho;
+  } else{
+    $ancho_final = ceil($y_ratio * $ancho);
+    $alto_final = $max_alto;
+  }
+    $tmp=imagecreatetruecolor($ancho_final,$alto_final);
+    imagecopyresampled($tmp,$img_original,0,0,0,0,$ancho_final, $alto_final,$ancho,$alto);
+    imagedestroy($img_original);
+    $calidad=70;
+    imagejpeg($tmp,$ruta.$nombreN,$calidad);
+    
+}
+
+
+
+
+/*$equipos=array('madrid','barsa','sevilla','betis','miraflor','orcasur');
+$partidos=array();
+for($i=0;$i<count($equipos);$i++){
+  for($j=$i+1;$j<count($equipos);$j++){
+    $partido=array(
+    'id'=>$i+$j*rand(),
+    'casa'=>$equipos[$i],
+    'visitante'=>$equipos[$j],
+    );
+    $partidos[]=$partido;
+    //echo $equipos[$i]." - ".$equipos[$j]."<br>";
+  }
+}
+$tpartidos=6*5/2;
+$jugados=array();
+
+for($i=0;count($jugados)<15;$i++){
+  $partido=array_rand($partidos,1);
+
+  if(!in_array($partido,$jugados)){
+    echo "Partido: ".count($jugados)." ".$partidos[$partido]['casa']." - ".$partidos[$partido]['visitante'];
+    echo "<br>";
+    $jugados[]=$partido;
+  }  
+}
+//var_dump($jugados);*/
  ?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Cargar imagen</title>
+        <meta name="author" content="Fernando Magrosoto V." />
+        <meta name="history" content="01 noviembre 2012" />
+        <meta name="email" content="fmagrosoto@gmail.com" />
+        
+        <style>
+            body {
+                background-color: rgb(250,250,250);
+                color: rgb(50,50,50);
+                font-family: sans-serif;
+                font-size: 100%;
+                width: 600px;
+                margin: auto;
+            }
+            :focus {
+                outline: none;
+            }
+            a {
+                text-decoration: none;
+                color: red;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            header {
+                border-bottom: 1px gray dotted;
+                padding-bottom: 25px;
+                margin-bottom: 25px;
+            }
+            header h1 {
+                font-size: xx-large;
+                text-shadow: 1px 1px 5px gray;
+            }
+            header em {
+                color: gray;
+            }
+            section form {
+                font-size: small;
+            }
+            section form fieldset {
+                padding: 10px 25px;
+                background-color: white;
+                border: 1px gray solid;
+                border-radius: .5em;
+            }
+            section form fieldset legend {
+                padding: 5px 10px;
+                border: 1px gray solid;
+                border-radius: .5em;
+            }
+            footer {
+                border-top: 1px gray dotted;
+                padding-top: 25px;
+                margin-top: 25px;
+                position: relative;
+            }
+            .msg {
+                margin-bottom: 20px;
+                padding: 10px;
+                background-color: rgb(255,250,250);
+                border: 1px red dotted;
+            }
+            .elimina {
+                color: blue;
+            }
+        </style>
+        
+    </head>
+    
+    <!-- Página demostrativa que permite reducir las imágenes cargadas -->
+    <!-- desde un formulario y almacenarlas en el servidor -->
+    <!-- utilizando las librerías GD de PHP.  -->
+    <!-- CREADO POR: Fernando Magrosoto V. -->
+    <!-- HISTORIA: Noviembre 2012 -->
+    <!-- CONTACTO: fmagrosoto@gmail.com -->
+    <!-- DESCARGAR CÓDIGO: https://gist.github.com/4687238 -->
+
+    <body>
+        <!-- HEADER -->
+        <header>
+            <h1>Script para cargar y reducir imágenes para entradas a un blog</h1>
+            <em>Script para subir imágenes, reducirlas, hacer versiones miniatura y
+            eliminar la versión original. Validando que sean únicamente GIF, PNG y JPG.</em>
+        </header>
+        
+        <!-- SECCION -->
+        <section>
+            
+            <?php if(isset($_POST['submit'])) { ?>
+            <div class="msg">El archivo ha sido cargado satisfactoriamente.</div>
+            <?php } ?>
+            
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>"
+                  method="POST"
+                  enctype="multipart/form-data">
+                <fieldset>
+                    <legend>Seleccionar una imagen</legend>
+                    <div><input type="file" name="foto" /></div>
+                    <div style="margin-top: 10px;"><input type="submit" name="submit" />
+                    <a href="<?php echo $_SERVER['PHP_SELF']; ?>">Reiniciar</a></div>
+                </fieldset>
+            </form>
+            
+            <div style="margin-top: 25px; font-size: small;">
+                <?php
+                $path = dirname(__FILE__);
+                $directorio=dir($path);
+                echo "Directorio de fotos: <em>".$path.":</em><br />
+                    <span style='color: rgb(150,150,150);'>// Únicamente muestra GIF, JPG y PNG.</span><br /><br />";
+                
+                while ($archivo = $directorio->read()) {
+                    $extension = end(explode('.', $archivo));
+                    if($extension == 'png'
+                            || $extension == 'gif'
+                            || $extension == 'jpg'){
+                        echo "<a href='".$archivo."' target='_blank'>".$archivo."</a> [ <a class='elimina' href='".$_SERVER['PHP_SELF']."?eliminar=".$archivo."'>eliminar</a> ]<br>";
+                    }
+                }
+                $directorio->close();
+                ?>
+            </div>
+            
+        </section>
+        <!-- FOOTER -->
+        <footer>
+            <p>&copy; 2012 - Fernando Magrosoto Vásquez</p>
+            <div style="position: absolute; top: 25px; right: 0;"><a href="http://www.w3.org/html/logo/">
+                    <img src="http://www.w3.org/html/logo/badge/html5-badge-h-css3-semantics.png"
+                         width="165" height="64" alt="HTML5 Powered with CSS3 / Styling, and Semantics"
+                         title="HTML5 Powered with CSS3 / Styling, and Semantics">
+                </a>
+            </div>
+        </footer>
+        
+        <!-- FIN DE LA PÁGINA -->
+        <!-- EOF -->
+    </body>
+</html>
+ @cefaloide
+cefaloide commented on 21 Jan 2015
+Hola!
+Muy bueno el aporte, el único problema que tengo con el script es el tratamiento de las transparencia de los .png.
+
+Por lo demás funciona perfectamente :)
+Saludos!
+@hcumbicusr
+hcumbicusr commented on 15 Sep 2015
+Excelente aporte, gracias me sirvió de mucho
+@saidhitti
+saidhitti commented on 9 Nov 2015
+Gracias, una pregunta, lo unico que se debe cambiar es en: $directorio = dirname(FILE);
+
+debo poner el nombre del directorio solo el nombre o con comillas, diagonales, etc ? pues dice que si cargo la imagen pero no aparece en el mismo.
+
+le puse: $directorio = dirname(fotos); y no pasa de ahi.
+
+Agradezco infinitamente tu ayuda.
+Saludos !

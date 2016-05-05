@@ -6,7 +6,7 @@
 <form name="insertarEMP" action="index.php?ctl=regEmpresa" method="POST">
     <table>
         <tr>
-            <th>Nombre Acceso *</th><td><input type="text" name="user" value="<?php echo $params['user']?>" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" required /></td><td class="requisitos">(Solo letras. Max=48)</td>
+            <th>Nombre Acceso *</th><td><input type="text" name="user" value="<?php echo $params['user']?>" pattern="([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\ ]){2,50}" required /></td><td class="requisitos">(Solo letras. Max=48)</td>
         </tr>
         <tr>
             <th>Clave Acceso *</th><td><input type="password" name="pass" value="<?php echo $params['pass'] ?>" pattern="[A-Za-z0-9!?-]{8,20}" required /></td><td class="requisitos">(Letras y Numeros. Min=8. Max=20)</td>

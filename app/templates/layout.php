@@ -4,6 +4,7 @@
   <head>
     <title>ColoWork</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="<?php echo 'css/'.Config::$pro_vis_css ?>" />
     <link href="../web/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="js/script.js"></script>
@@ -13,8 +14,7 @@
       
     </div> -->
     <div id="menu">
-      <hr/>
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -33,8 +33,8 @@
             <li><a href="index.php?ctl=verOfertas">Ofertas</a></li>
             <?php if(isset($_SESSION['user'])){ ?>
 
-
-              <li><a href="index.php?ctl=verAlumnos">Alumnos</a></li>              
+              <li><a href="index.php?ctl=verAlumnos">Alumnos</a></li>
+              <li><a href="index.php?ctl=verProfesores">Profesores</a></li>               
 
               <?php if($_SESSION['rol']=="centro" || $_SESSION['rol']=="admin"){ ?>
               <li><a href="index.php?ctl=verCiclos">Ciclos Formativos</a></li>
@@ -45,9 +45,9 @@
               
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Buscar...">
+              <form class="navbar-form navbar-left" method="POST" action="index.php?ctl=buscar" role="search">
+                <div class="form-group"> 
+                  <input type="text" name="buscarGeneral" class="form-control" placeholder="Buscar...">
                 </div>
                 <button type="submit" class="btn btn-default">Buscar</button>
               </form>
@@ -57,7 +57,9 @@
               <li class="dropdown">
               <a href="index.php?ctl=login" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hola, <?php echo $_SESSION['user'] ?><span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="index.php?ctl=verPerfil">Ver Perfil</a></li>
+                  <?php if($_SESSION['rol']!="admin"){ ?>        
+                  <li><a href="index.php?ctl=verPerfil">Ver Perfil</a></li> 
+                  <?php } ?>                
                  
                  <?php if($_SESSION['rol']=="admin"){ ?>
                  <li><a href="index.php?ctl=altaCentro">Alta Usuario Centro</a></li>
@@ -75,9 +77,7 @@
 
                   <?php } ?>
 
-                  <?php if($_SESSION['rol']=="alumno"){ ?>        
 
-                  <?php } ?>
 
                   
                   <li><a href="index.php?ctl=logout">Cerrar Sesion</a></li>
@@ -100,22 +100,14 @@
             </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
           </nav>
-          <!--
-          |
-          <a href="index.php?ctl=insertar">insertar alimento</a> |
-          <a href="index.php?ctl=buscar">buscar por nombre</a> |
-          <a href="index.php?ctl=buscarAlimentosPorEnergia">buscar por energia</a> |
-          <a href="index.php?ctl=buscarAlimentosCombinada">búsqueda combinada</a>
-          <a href="index.php?ctl=verwiki">Enlaces Wiki</a> -->
           <hr/>
         </div>
         <div id="contenido">
           <?php echo $contenido ?>
         </div>
         <div id="pie">
-          <hr/>
           <div align="center">
-            <nav class="navbar navbar-default ">
+            <nav class="navbar navbar-default navbar-fixed-bottom ">
               <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -128,7 +120,7 @@
                   
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="footer">
+                <div class="collapse navbar-collapse " id="footer">
                   <ul class="nav navbar-nav">
                     <li><a href="index.php?ctl=conleg">Condiciones Legales</a></li>
                     <li><a href="index.php?ctl=cookies">Politica de Cookies</a></li>
@@ -138,7 +130,6 @@
                   </div><!-- /.container-fluid -->
                 </nav>
               </div>
-              <hr/>
             </div>
             <!-- Bootstrap core JavaScript
             ================================================== -->

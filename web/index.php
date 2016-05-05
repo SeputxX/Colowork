@@ -6,6 +6,10 @@ session_start();
  require_once __DIR__ . '/../app/Config.php';
  require_once __DIR__ . '/../app/Model.php';
  require_once __DIR__ . '/../app/Controller.php';
+ require_once dirname(__FILE__).'/libs/html2pdf/vendor/autoload.php';
+    use Spipu\Html2Pdf\Html2Pdf;
+    use Spipu\Html2Pdf\Exception\Html2PdfException;
+    use Spipu\Html2Pdf\Exception\ExceptionFormatter;
 
  // enrutamiento
  $map = array(
@@ -25,10 +29,17 @@ session_start();
      'altaCentro' => array('controller' =>'Controller', 'action' =>'altaCentro'),
      'altaCiclo' => array('controller' =>'Controller', 'action' =>'altaCiclo'),
      'verCiclos' => array('controller' =>'Controller', 'action' =>'verCiclos'),
+     'verCiclo' => array('controller' =>'Controller', 'action' =>'verCiclo'),
      'activarEmpresa' => array('controller' =>'Controller', 'action' =>'activarEmpresa'),
      'activarOferta' => array('controller' =>'Controller', 'action' =>'activarOferta'),
      'enviarCurriculum' => array ('controller' =>'Controller', 'action'=>'enviarCurriculum'),
-     'verwiki' => array('controller' =>'Controller', 'action' =>'wiki')
+     'verCurriculum' => array ('controller' =>'Controller', 'action'=>'verCurriculum'),
+     'verProfesores' => array ('controller' =>'Controller', 'action'=>'verProfesores'),
+     'modificarPerfil' => array ('controller' =>'Controller', 'action'=>'modificarPerfil'),
+     'modificarFoto' => array ('controller' =>'Controller', 'action'=>'modificarFoto'),
+     'aptos' => array('controller' =>'Controller', 'action' =>'aptos'),
+     'buscar' => array('controller' =>'Controller', 'action' =>'buscarGeneral'),
+     'borrarPerfil' => array ('controller' =>'Controller', 'action'=>'borrarPerfil'),
  );
 
  // Parseo de la ruta

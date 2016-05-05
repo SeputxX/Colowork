@@ -11,20 +11,11 @@
 <?php foreach ($params['ciclos'] as $ciclo) :?>
 	<table name="ciclo">
 		<tr>
-			<td colspan="2"><b><?php echo $ciclo['abreviatura']." ".$ciclo['nombre'] ?></b></td>
+			<td><a href="index.php?ctl=verCiclo&id='<?php echo $ciclo['idciclo'] ?>'"><b><?php echo $ciclo['abreviatura'] ?></b></a></td>
 		</tr>
 		<tr>
-			<td>Descripcion: </td><td><?php echo $ciclo['descripcion'] ?></td>
+			<td><?php echo $ciclo['nombre'] ?></td>
 		</tr>
-		<tr>
-			<td>Competencias: </td>
-			<td>
-			<?php foreach ($ciclo['competencias'] as $competencia) :?>
-				<?php echo $competencia." " ?>
-			<?php endforeach; ?>
-			</td>
-		</tr>
-		
 	</table>
 
 

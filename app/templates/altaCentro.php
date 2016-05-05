@@ -4,14 +4,17 @@
 <?php endif; ?>
 <form method="POST" action="index.php?ctl=altaCentro">
 	<table>
+	    <tr>
+            <th>Nombre Acceso *</th><td><input type="text" name="user" value="<?php echo $params['user']?>" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,48}" required /></td><td class="requisitos">(Solo letras. Max=48)</td>
+        </tr>
 		<tr>
-			<td>Nombre</td><td><input type="text" name="nombre" value="<?php echo $params['nombre'] ?>"pattern="([a-zA-Z]|\s){2,50}" required> (Solo letras max 50)</td>
+			<td>Nombre</td><td><input type="text" name="nombre" value="<?php echo $params['nombre'] ?>" pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]|\s){2,50}" required> (Solo letras max 50)</td>
 		</tr>
 		<tr>
 			<td>Contraseña</td><td><input name="pass" value="<?php echo $params['pass'] ?>" type="password" pattern="[A-Za-z0-9!?-]{8,20}" required>(Letras y Numeros. Min=8. Max=20)</td>
 		</tr>
 		<tr>
-			<td>Apellidos</td><td><input name="apellidos" value="<?php echo $params['apellidos'] ?>" type="text"pattern="([a-zA-Z]|\s){2,100}" required> (Solo letras max 50)</td>
+			<td>Apellidos</td><td><input name="apellidos" value="<?php echo $params['apellidos'] ?>" type="text"pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]|\s){2,50}" required> (Solo letras max 50)</td>
 		</tr>
 		<tr>
 			<th>Correo: </th>
