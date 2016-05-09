@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-04-2016 a las 09:07:50
+-- Tiempo de generación: 05-05-2016 a las 12:21:16
 -- Versión del servidor: 5.6.26
 -- Versión de PHP: 5.6.12
 
@@ -19,18 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `colowork`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura Stand-in para la vista `alumnos_competencias`
---
-CREATE TABLE IF NOT EXISTS `alumnos_competencias` (
-`idalumno` int(11)
-,`nombre` varchar(50)
-,`idcompetencia` int(11)
-,`nomCom` varchar(300)
-);
 
 -- --------------------------------------------------------
 
@@ -84,7 +72,7 @@ INSERT INTO `col_actividades` (`idactividad`, `nombre`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `col_alumnos` (
-  `idalumno` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `sexo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -94,24 +82,16 @@ CREATE TABLE IF NOT EXISTS `col_alumnos` (
   `fecha` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `transporte` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `experiencia` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
-  `titulos` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
-  `idiomas` varchar(500) COLLATE utf8_spanish_ci NOT NULL,
   `otros` varchar(500) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `col_alumnos`
 --
 
-INSERT INTO `col_alumnos` (`idalumno`, `nombre`, `apellidos`, `sexo`, `direccion`, `correo`, `nacionalidad`, `fecha`, `estado`, `transporte`, `experiencia`, `titulos`, `idiomas`, `otros`) VALUES
-(1, 'antonio', 'delgado moreira', 'Hombre', 'asd', 'asda@asda.com', 'español', '12/12/1999', 'Estudiando', 'Si', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\n		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adip', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adip', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adip', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur adip'),
-(2, 'oscar', 'delgado moreira', 'Hombre', 'asd', 'asda@asda.com', 'español', '12/12/1999', 'Parado', 'No', 'dasdasdasdas', 'DAW.SMX.FPB.', 'dasdasdasdasdasdasdas', 'dasdasdas'),
-(7, 'sergiodasd', 'delgado moreira', 'Hombre', 'asd', 'dsasd@sd.com', 'español', '12/12/1999', 'Estudiando', 'Si', 'adsasd', 'DAW.SMX.FPB.', 'dasdas', 'asdas'),
-(8, 'pepito', 'delgado moreira', 'Hombre', 'asd', 'coloworkdaw@gmail.com', 'español', '12/12/1999', 'Parado', 'No', 'qweqew', 'DAW', 'qweqwe', 'qweqweq'),
-(9, 'pepitos', 'delgado moreira', 'Hombre', 'asd', 'sergio95valde@gmail.com', 'español', '12/12/1999', 'Parado', 'No', '', 'DAW.SMX', '', ''),
-(10, 'pepitt', 'delgado moreira', 'Hombre', 'asd', 'travian-arnoll@hotmail.com', 'español', '12/12/1999', 'Parado', 'No', '', 'SMX', '', ''),
-(11, 'admin', 'dasdasddas', 'Hombre', 'dasdasda', 'example@loquesea.algo', 'españa', '12/12/1999', 'Parado', 'No', 'asdassd', 'DAW', 'asdasd', 'asdasd');
+INSERT INTO `col_alumnos` (`iduser`, `nombre`, `apellidos`, `sexo`, `direccion`, `correo`, `nacionalidad`, `fecha`, `estado`, `transporte`, `otros`) VALUES
+(28, 'miguel', 'Roig Moral', 'Hombre', 'asd', 'asda@asda.com', 'español', '12/12/1999', 'Parado', 'No', 'eqweq'),
+(37, 'sergio', 'delgado moreira', 'Hombre', 'asd', 'asda@asda.com', 'español', '12/12/1999', 'Parado', 'No', 'asdas');
 
 -- --------------------------------------------------------
 
@@ -120,7 +100,7 @@ INSERT INTO `col_alumnos` (`idalumno`, `nombre`, `apellidos`, `sexo`, `direccion
 --
 
 CREATE TABLE IF NOT EXISTS `col_alum_ciclo` (
-  `idalumno` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
   `idciclo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -128,16 +108,54 @@ CREATE TABLE IF NOT EXISTS `col_alum_ciclo` (
 -- Volcado de datos para la tabla `col_alum_ciclo`
 --
 
-INSERT INTO `col_alum_ciclo` (`idalumno`, `idciclo`) VALUES
-(1, 7),
-(7, 7),
-(8, 7),
-(9, 7),
-(11, 7),
-(7, 8),
-(9, 8),
-(10, 8),
-(7, 14);
+INSERT INTO `col_alum_ciclo` (`iduser`, `idciclo`) VALUES
+(28, 7),
+(37, 7),
+(28, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `col_alum_experiencia`
+--
+
+CREATE TABLE IF NOT EXISTS `col_alum_experiencia` (
+  `iduser` int(11) NOT NULL,
+  `finicio` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `ffinal` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `col_alum_experiencia`
+--
+
+INSERT INTO `col_alum_experiencia` (`iduser`, `finicio`, `ffinal`, `descripcion`) VALUES
+(37, '11/11/1998', '11/11/1998', 'asdasd');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `col_alum_idiomas`
+--
+
+CREATE TABLE IF NOT EXISTS `col_alum_idiomas` (
+  `iduser` int(11) NOT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
+  `nivel_hablado` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `nivel_escrito` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `col_alum_idiomas`
+--
+
+INSERT INTO `col_alum_idiomas` (`iduser`, `nombre`, `fecha`, `nivel_hablado`, `nivel_escrito`) VALUES
+(28, 'Frances', '11/11/1996', 'Alto', 'Alto'),
+(28, 'Catalan', '11/11/1995', 'Medio', 'Medio'),
+(28, 'Ruso', '11/11/1995', 'Bajo', 'Bajo'),
+(37, 'Aleman', '11/11/1998', 'Alto', 'Alto');
 
 -- --------------------------------------------------------
 
@@ -164,20 +182,20 @@ INSERT INTO `col_ciclos` (`idciclo`, `nombre`, `abreviatura`, `descripcion`) VAL
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `col_codigos`
+-- Estructura de tabla para la tabla `col_codigo_centro`
 --
 
-CREATE TABLE IF NOT EXISTS `col_codigos` (
+CREATE TABLE IF NOT EXISTS `col_codigo_centro` (
   `idcodigo` int(11) NOT NULL,
-  `nombre_centro` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `codigo` varchar(7) COLLATE utf8_spanish_ci NOT NULL
+  `centro` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `codigo` varchar(10) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
--- Volcado de datos para la tabla `col_codigos`
+-- Volcado de datos para la tabla `col_codigo_centro`
 --
 
-INSERT INTO `col_codigos` (`idcodigo`, `nombre_centro`, `codigo`) VALUES
+INSERT INTO `col_codigo_centro` (`idcodigo`, `centro`, `codigo`) VALUES
 (1, 'IES Sacolomina', 'Q2W3E4');
 
 -- --------------------------------------------------------
@@ -225,33 +243,11 @@ INSERT INTO `col_competencias` (`idcompetencia`, `nombre`, `idciclo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `col_contratos`
---
-
-CREATE TABLE IF NOT EXISTS `col_contratos` (
-  `idcontrato` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `col_contratos`
---
-
-INSERT INTO `col_contratos` (`idcontrato`, `nombre`) VALUES
-(1, 'Indefinido'),
-(2, 'Temporal'),
-(3, 'Formacion'),
-(4, 'Practicas');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `col_empresas`
 --
 
 CREATE TABLE IF NOT EXISTS `col_empresas` (
-  `idempresa` int(3) NOT NULL,
-  `user` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `iduser` int(3) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `actividad` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `idfiscal` varchar(7) COLLATE utf8_spanish_ci NOT NULL,
@@ -266,37 +262,14 @@ CREATE TABLE IF NOT EXISTS `col_empresas` (
   `ofertas` varchar(3) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `cod_act` varchar(22) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `col_empresas`
 --
 
-INSERT INTO `col_empresas` (`idempresa`, `user`, `nombre`, `actividad`, `idfiscal`, `razon`, `direccion`, `poblacion`, `pais`, `provincia`, `codpostal`, `telefono`, `fax`, `ofertas`, `correo`, `cod_act`) VALUES
-(15, 'miguel', 'Empresa Prueba', 'Hardware Sistemas de Informatica', '000000', 'Practicas', 'Sant jaime', 'Santa Eualia des Riu', 'España', 'Islas Baleares', '7840', 648737309, 648737309, 'si', '', ''),
-(16, 'sergio', 'qweqweqw', 'Hardware Sistemas de Informatica', '111111', 'qqqqqq', 'qqqqq', 'qqqq', 'qqqqq', 'qqqqqq', '07840', 987456321, 111111111, 'si', 'example@loquesea.algo', ''),
-(22, 'tikka', 'tikka', 'Agroalimentario', '135792', 'qwe', 'Sant jaime', 'asd', 'España', 'Islas Baleares', '28341', 987456321, 2147483647, 'si', '', ''),
-(25, 'empruebas', 'emppruebas', 'Agroalimentario', '143456', 'Practicas', 'asd', 'asd', 'asd', 'asd', '28341', 987456321, 2147483647, 'no', 'example@loquesea.algo', '');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `col_jornadas`
---
-
-CREATE TABLE IF NOT EXISTS `col_jornadas` (
-  `idjornada` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `col_jornadas`
---
-
-INSERT INTO `col_jornadas` (`idjornada`, `nombre`) VALUES
-(1, 'Tiempo Completo'),
-(2, 'Tiempo Parcial'),
-(3, 'Parcial por Horas');
+INSERT INTO `col_empresas` (`iduser`, `nombre`, `actividad`, `idfiscal`, `razon`, `direccion`, `poblacion`, `pais`, `provincia`, `codpostal`, `telefono`, `fax`, `ofertas`, `correo`, `cod_act`) VALUES
+(4, 'tikkaqq', 'Agroalimentario', '123456', 'WWWW', 'wwwWW', 'WWWWW', 'ww', 'ww', '12345', 912222222, 88222222, 'si', 'tikka2@hotmail.com', '7a2ce833bb1b76f8b67e');
 
 -- --------------------------------------------------------
 
@@ -306,27 +279,33 @@ INSERT INTO `col_jornadas` (`idjornada`, `nombre`) VALUES
 
 CREATE TABLE IF NOT EXISTS `col_ofertas` (
   `idoferta` int(3) NOT NULL,
-  `idempresa` int(3) NOT NULL,
+  `iduser` int(3) NOT NULL,
   `titulo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` varchar(250) COLLATE utf8_spanish_ci NOT NULL,
-  `ubicacion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `contrato` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `jornada` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `salario` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `competencias` varchar(8000) COLLATE utf8_spanish_ci NOT NULL,
+  `zona` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `activa` varchar(3) COLLATE utf8_spanish_ci NOT NULL,
   `cod_act` varchar(22) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `col_ofertas`
 --
 
-INSERT INTO `col_ofertas` (`idoferta`, `idempresa`, `titulo`, `descripcion`, `ubicacion`, `contrato`, `jornada`, `salario`, `competencias`, `activa`, `cod_act`) VALUES
-(7, 16, 'pruebaSMX', 'sdasdas', 'dasda', 'Indefinido', 'Tiempo Completo', 'No especificado', 'Instalar y configurar el software base en sistemas microinformáticos.Instalar , configurar y mantener paquetes informáticos de propósito general y aplicaciones específicas, facilitando al usuario su utilización', 'si', ''),
-(16, 16, 'Informaticosda', 'adsdasdas', 'asdasg', 'Indefinido', 'Tiempo Completo', 'No especificado', 'Realizar operaciones auxiliares de montaje de equipos microinformáticos.Realizar operaciones auxiliares de mantenimiento de sistemas microinformáticos.Realizar operaciones auxiliares con tecnologías de la información y comunicación', 'no', 'c6a024f688cd57cf6fd4'),
-(17, 16, 'Otra massda', 'adsdasdas', 'dasdasd', 'Indefinido', 'Tiempo Completo', 'No especificado', 'Realizar operaciones auxiliares de montaje de equipos microinformáticos', 'no', '17326d10d511828f6b34'),
-(18, 16, 'Pruebaqwss', 'asdasd', 'asdas', 'Indefinido', 'Tiempo Completo', 'No especificado', 'Desarrollar aplicaciones web con acceso a bases de datos utilizando lenguajes, objetos de acceso y herramientas de mapeo adecuados a las especificaciones', 'no', '5847c1b5bad36912f130');
+INSERT INTO `col_ofertas` (`idoferta`, `iduser`, `titulo`, `descripcion`, `contrato`, `jornada`, `salario`, `competencias`, `zona`, `activa`, `cod_act`) VALUES
+(6, 4, 'Informatico', 'Se busca programador', 'Formación', 'Tiempo Parcial', 'Más de 20.000', 'Realizar operaciones auxiliares de montaje de equipos microinformáticos.Realizar operaciones de ensamblado en el montaje de equipos eléctricos y electrónicos', '', 'si', '8af95fe2ab1a54b488ef'),
+(7, 4, 'Informatico', ' Se busca programador', 'Temporal', 'Tiempo Completo', 'Entre 9.000 y 15.000', 'Desarrollar aplicaciones web con acceso a bases de datos utilizando lenguajes, objetos de acceso y herramientas de mapeo adecuados a las especificaciones', '', 'si', '15709800bdacf685676c'),
+(8, 4, 'Informatico', ' Se busca programador', 'Temporal', 'Tiempo Completo', 'Entre 9.000 y 15.000', 'Desarrollar aplicaciones web con acceso a bases de datos utilizando lenguajes, objetos de acceso y herramientas de mapeo adecuados a las especificaciones', '', 'si', '2389ceb16e2cc3941618'),
+(13, 4, 'pruebaz', 'zzzz', 'Indefinido', 'Tiempo Completo', 'No Especificado', 'Desarrollar componentes multimedia para su integración en aplicaciones web, empleando herramientas específicas y siguiendo las especificaciones establecidas.Desarrollar e integrar componentes software en el entorno del servidor web, empleando herramientas y lenguajes específicos, para cumplir las especificaciones de la aplicación.Desarrollar servicios para integrar sus funciones en otras aplicaciones web, asegurando su funcionalidad.Montar equipos microinformáticos', 'San Juan Bautista', 'si', '57750683947a2891662f'),
+(14, 4, 'pruebaz', 'zzzz', 'Indefinido', 'Tiempo Completo', 'No Especificado', 'Desarrollar componentes multimedia para su integración en aplicaciones web, empleando herramientas específicas y siguiendo las especificaciones establecidas.Desarrollar e integrar componentes software en el entorno del servidor web, empleando herramientas y lenguajes específicos, para cumplir las especificaciones de la aplicación.Desarrollar servicios para integrar sus funciones en otras aplicaciones web, asegurando su funcionalidad.Montar equipos microinformáticos', 'San Juan Bautista', 'si', '005f91955ff9fc532184'),
+(15, 4, 'mello', 'asdasda', 'Indefinido', 'Tiempo Completo', 'No Especificado', 'Realizar operaciones auxiliares de montaje de equipos microinformáticos.Realizar operaciones de conexionado en el montaje de equipos eléctricos y electrónicos.Aplicar técnicas y procedimientos relacionados con la seguridad en sistemas, servicios y aplicaciones, cumpliendo el plan de seguridad.Desarrollar componentes multimedia para su integración en aplicaciones web, empleando herramientas específicas y siguiendo las especificaciones establecidas.Desarrollar servicios para integrar sus funciones en otras aplicaciones web, asegurando su funcionalidad', 'Ibiza', 'no', 'd5215023c7e116864efd'),
+(16, 4, 'mello', 'asdasda', 'Indefinido', 'Tiempo Completo', 'No Especificado', 'Realizar operaciones auxiliares de montaje de equipos microinformáticos.Realizar operaciones de conexionado en el montaje de equipos eléctricos y electrónicos.Aplicar técnicas y procedimientos relacionados con la seguridad en sistemas, servicios y aplicaciones, cumpliendo el plan de seguridad.Desarrollar componentes multimedia para su integración en aplicaciones web, empleando herramientas específicas y siguiendo las especificaciones establecidas.Desarrollar servicios para integrar sus funciones en otras aplicaciones web, asegurando su funcionalidad', 'Ibiza', 'no', '65a3a3e323d4882bc0d0'),
+(17, 4, 'asdas', 'dasda', 'Indefinido', 'Tiempo Completo', 'No Especificado', 'Desarrollar servicios para integrar sus funciones en otras aplicaciones web, asegurando su funcionalidad', 'Ibiza', 'no', 'd87d3902e1c4efdc9d79'),
+(18, 4, 'asdas', 'asdasdasd', 'Indefinido', 'Tiempo Completo', 'No Especificado', 'Realizar operaciones auxiliares de montaje de equipos microinformáticos.Realizar operaciones auxiliares de mantenimiento de sistemas microinformáticos', 'San Antonio Abad', 'no', '741a0099c9ac04c7bfc8'),
+(19, 4, 'asdas', 'asdasdasd', 'Indefinido', 'Tiempo Completo', 'No Especificado', 'Realizar operaciones auxiliares de montaje de equipos microinformáticos.Realizar operaciones auxiliares de mantenimiento de sistemas microinformáticos', 'San Antonio Abad', 'no', '0c6fc0ac5afb01a75fe1');
 
 -- --------------------------------------------------------
 
@@ -344,13 +323,33 @@ CREATE TABLE IF NOT EXISTS `col_oferta_competencia` (
 --
 
 INSERT INTO `col_oferta_competencia` (`idoferta`, `idcompetencia`) VALUES
-(7, 23),
-(7, 25),
+(6, 1),
+(15, 1),
 (16, 1),
-(16, 2),
-(16, 3),
-(17, 1),
-(18, 12);
+(18, 1),
+(19, 1),
+(18, 2),
+(19, 2),
+(6, 4),
+(15, 5),
+(16, 5),
+(15, 9),
+(16, 9),
+(7, 12),
+(8, 12),
+(13, 15),
+(14, 15),
+(15, 15),
+(16, 15),
+(13, 17),
+(14, 17),
+(13, 18),
+(14, 18),
+(15, 18),
+(16, 18),
+(17, 18),
+(13, 21),
+(14, 21);
 
 -- --------------------------------------------------------
 
@@ -359,19 +358,20 @@ INSERT INTO `col_oferta_competencia` (`idoferta`, `idcompetencia`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `col_profesores` (
-  `idprofesor` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `apellidos` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `correo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `ocupacion` varchar(500) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `col_profesores`
 --
 
-INSERT INTO `col_profesores` (`idprofesor`, `nombre`, `apellidos`, `correo`, `ocupacion`) VALUES
-(8, 'profesor', 'asdahjj', 'asda@asda.com', 'asdasaeqweqweq');
+INSERT INTO `col_profesores` (`iduser`, `nombre`, `apellidos`, `correo`, `ocupacion`) VALUES
+(11, 'jose', 'guash', 'example@loquesea.algo', 'Profesor'),
+(19, 'tere', 'guash', 'asda@asda.com', 'Profesora');
 
 -- --------------------------------------------------------
 
@@ -396,28 +396,6 @@ INSERT INTO `col_roles` (`nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `col_salarios`
---
-
-CREATE TABLE IF NOT EXISTS `col_salarios` (
-  `idsalario` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `col_salarios`
---
-
-INSERT INTO `col_salarios` (`idsalario`, `nombre`) VALUES
-(1, 'No especificado'),
-(2, 'Menos de 9.000'),
-(3, 'Entre 9.000 y 15.000'),
-(4, 'Entre 15.000 y 20.000'),
-(5, 'Mas de 20.000');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `col_usuarios`
 --
 
@@ -425,34 +403,21 @@ CREATE TABLE IF NOT EXISTS `col_usuarios` (
   `iduser` int(3) NOT NULL,
   `user` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `pass` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `url` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `rol` varchar(50) COLLATE utf8_spanish_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `col_usuarios`
 --
 
-INSERT INTO `col_usuarios` (`iduser`, `user`, `pass`, `rol`) VALUES
-(6, 'sergio', '12345678', 'empresa'),
-(7, 'admin', '12345678', 'admin'),
-(25, 'antonio', '12345678', 'alumno'),
-(37, 'tikka', '12345678a', 'empresa'),
-(42, 'sergioasd', '12346578', 'alumno'),
-(45, 'empruebas', '123456789', 'empresa'),
-(46, 'pepito', '12345678', 'alumno'),
-(47, 'pepitos', '12345678', 'alumno'),
-(48, 'pepitt', '12345678', 'alumno'),
-(58, 'papa', '123456789q', 'empresa'),
-(61, 'profesor', '12345678', 'centro');
-
--- --------------------------------------------------------
-
---
--- Estructura para la vista `alumnos_competencias`
---
-DROP TABLE IF EXISTS `alumnos_competencias`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `alumnos_competencias` AS select `col_alumnos`.`idalumno` AS `idalumno`,`col_alumnos`.`nombre` AS `nombre`,`col_competencias`.`idcompetencia` AS `idcompetencia`,`col_competencias`.`nombre` AS `nomCom` from ((`col_alumnos` join `col_alum_ciclo` on((`col_alumnos`.`idalumno` = `col_alum_ciclo`.`idalumno`))) join `col_competencias` on((`col_alum_ciclo`.`idciclo` = `col_competencias`.`idciclo`)));
+INSERT INTO `col_usuarios` (`iduser`, `user`, `pass`, `url`, `rol`) VALUES
+(1, 'admin', '12345678', '', 'admin'),
+(4, 'tikkaqq', '12345678', '', 'empresa'),
+(11, 'jose', '12345678', '', 'centro'),
+(19, 'tereresu', '12345678', '', 'centro'),
+(28, 'elmello69', '12345678', 'img/users/mello.jpg', 'alumno'),
+(37, 'elmello65', '12345678', '/colowork/web/img/users/user_elmello65.jpg', 'alumno');
 
 --
 -- Índices para tablas volcadas
@@ -468,14 +433,26 @@ ALTER TABLE `col_actividades`
 -- Indices de la tabla `col_alumnos`
 --
 ALTER TABLE `col_alumnos`
-  ADD PRIMARY KEY (`idalumno`);
+  ADD PRIMARY KEY (`iduser`);
 
 --
 -- Indices de la tabla `col_alum_ciclo`
 --
 ALTER TABLE `col_alum_ciclo`
-  ADD PRIMARY KEY (`idalumno`,`idciclo`),
+  ADD PRIMARY KEY (`iduser`,`idciclo`),
   ADD KEY `idciclo` (`idciclo`);
+
+--
+-- Indices de la tabla `col_alum_experiencia`
+--
+ALTER TABLE `col_alum_experiencia`
+  ADD KEY `iduser` (`iduser`);
+
+--
+-- Indices de la tabla `col_alum_idiomas`
+--
+ALTER TABLE `col_alum_idiomas`
+  ADD KEY `iduser` (`iduser`);
 
 --
 -- Indices de la tabla `col_ciclos`
@@ -484,64 +461,51 @@ ALTER TABLE `col_ciclos`
   ADD PRIMARY KEY (`idciclo`);
 
 --
--- Indices de la tabla `col_codigos`
+-- Indices de la tabla `col_codigo_centro`
 --
-ALTER TABLE `col_codigos`
-  ADD PRIMARY KEY (`idcodigo`);
+ALTER TABLE `col_codigo_centro`
+  ADD PRIMARY KEY (`idcodigo`),
+  ADD UNIQUE KEY `centro` (`centro`);
 
 --
 -- Indices de la tabla `col_competencias`
 --
 ALTER TABLE `col_competencias`
-  ADD PRIMARY KEY (`idcompetencia`);
-
---
--- Indices de la tabla `col_contratos`
---
-ALTER TABLE `col_contratos`
-  ADD PRIMARY KEY (`idcontrato`);
+  ADD PRIMARY KEY (`idcompetencia`,`idciclo`),
+  ADD KEY `idciclo` (`idciclo`);
 
 --
 -- Indices de la tabla `col_empresas`
 --
 ALTER TABLE `col_empresas`
-  ADD PRIMARY KEY (`idempresa`);
-
---
--- Indices de la tabla `col_jornadas`
---
-ALTER TABLE `col_jornadas`
-  ADD PRIMARY KEY (`idjornada`);
+  ADD PRIMARY KEY (`iduser`);
 
 --
 -- Indices de la tabla `col_ofertas`
 --
 ALTER TABLE `col_ofertas`
-  ADD PRIMARY KEY (`idoferta`);
+  ADD PRIMARY KEY (`idoferta`,`iduser`),
+  ADD KEY `col_ofertas_ibfk_1` (`iduser`);
 
 --
 -- Indices de la tabla `col_oferta_competencia`
 --
 ALTER TABLE `col_oferta_competencia`
-  ADD PRIMARY KEY (`idoferta`,`idcompetencia`);
+  ADD PRIMARY KEY (`idoferta`,`idcompetencia`),
+  ADD KEY `idcompetencia` (`idcompetencia`);
 
 --
 -- Indices de la tabla `col_profesores`
 --
 ALTER TABLE `col_profesores`
-  ADD PRIMARY KEY (`idprofesor`);
-
---
--- Indices de la tabla `col_salarios`
---
-ALTER TABLE `col_salarios`
-  ADD PRIMARY KEY (`idsalario`);
+  ADD PRIMARY KEY (`iduser`);
 
 --
 -- Indices de la tabla `col_usuarios`
 --
 ALTER TABLE `col_usuarios`
-  ADD PRIMARY KEY (`iduser`);
+  ADD PRIMARY KEY (`iduser`),
+  ADD UNIQUE KEY `user` (`user`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -553,19 +517,14 @@ ALTER TABLE `col_usuarios`
 ALTER TABLE `col_actividades`
   MODIFY `idactividad` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=29;
 --
--- AUTO_INCREMENT de la tabla `col_alumnos`
---
-ALTER TABLE `col_alumnos`
-  MODIFY `idalumno` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
---
 -- AUTO_INCREMENT de la tabla `col_ciclos`
 --
 ALTER TABLE `col_ciclos`
   MODIFY `idciclo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
--- AUTO_INCREMENT de la tabla `col_codigos`
+-- AUTO_INCREMENT de la tabla `col_codigo_centro`
 --
-ALTER TABLE `col_codigos`
+ALTER TABLE `col_codigo_centro`
   MODIFY `idcodigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `col_competencias`
@@ -573,56 +532,79 @@ ALTER TABLE `col_codigos`
 ALTER TABLE `col_competencias`
   MODIFY `idcompetencia` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
--- AUTO_INCREMENT de la tabla `col_contratos`
---
-ALTER TABLE `col_contratos`
-  MODIFY `idcontrato` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
 -- AUTO_INCREMENT de la tabla `col_empresas`
 --
 ALTER TABLE `col_empresas`
-  MODIFY `idempresa` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT de la tabla `col_jornadas`
---
-ALTER TABLE `col_jornadas`
-  MODIFY `idjornada` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `iduser` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `col_ofertas`
 --
 ALTER TABLE `col_ofertas`
-  MODIFY `idoferta` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
---
--- AUTO_INCREMENT de la tabla `col_profesores`
---
-ALTER TABLE `col_profesores`
-  MODIFY `idprofesor` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT de la tabla `col_salarios`
---
-ALTER TABLE `col_salarios`
-  MODIFY `idsalario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `idoferta` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `col_usuarios`
 --
 ALTER TABLE `col_usuarios`
-  MODIFY `iduser` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=62;
+  MODIFY `iduser` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=38;
 --
 -- Restricciones para tablas volcadas
 --
 
 --
+-- Filtros para la tabla `col_alumnos`
+--
+ALTER TABLE `col_alumnos`
+  ADD CONSTRAINT `col_alumnos_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `col_usuarios` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `col_alum_ciclo`
 --
 ALTER TABLE `col_alum_ciclo`
-  ADD CONSTRAINT `col_alum_ciclo_ibfk_1` FOREIGN KEY (`idalumno`) REFERENCES `col_alumnos` (`idalumno`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `col_alum_ciclo_ibfk_2` FOREIGN KEY (`idciclo`) REFERENCES `col_ciclos` (`idciclo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `col_alum_ciclo_ibfk_2` FOREIGN KEY (`idciclo`) REFERENCES `col_ciclos` (`idciclo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `col_alum_ciclo_ibfk_3` FOREIGN KEY (`iduser`) REFERENCES `col_alumnos` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `col_alum_experiencia`
+--
+ALTER TABLE `col_alum_experiencia`
+  ADD CONSTRAINT `col_alum_experiencia_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `col_usuarios` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `col_alum_idiomas`
+--
+ALTER TABLE `col_alum_idiomas`
+  ADD CONSTRAINT `col_alum_idiomas_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `col_usuarios` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `col_competencias`
+--
+ALTER TABLE `col_competencias`
+  ADD CONSTRAINT `col_competencias_ibfk_1` FOREIGN KEY (`idciclo`) REFERENCES `col_ciclos` (`idciclo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `col_empresas`
+--
+ALTER TABLE `col_empresas`
+  ADD CONSTRAINT `col_empresas_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `col_usuarios` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `col_ofertas`
+--
+ALTER TABLE `col_ofertas`
+  ADD CONSTRAINT `col_ofertas_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `col_empresas` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `col_oferta_competencia`
 --
 ALTER TABLE `col_oferta_competencia`
-  ADD CONSTRAINT `col_oferta_competencia_ibfk_1` FOREIGN KEY (`idoferta`) REFERENCES `col_ofertas` (`idoferta`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `col_oferta_competencia_ibfk_1` FOREIGN KEY (`idoferta`) REFERENCES `col_ofertas` (`idoferta`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `col_oferta_competencia_ibfk_2` FOREIGN KEY (`idcompetencia`) REFERENCES `col_competencias` (`idcompetencia`);
+
+--
+-- Filtros para la tabla `col_profesores`
+--
+ALTER TABLE `col_profesores`
+  ADD CONSTRAINT `col_profesores_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `col_usuarios` (`iduser`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
