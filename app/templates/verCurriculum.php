@@ -87,7 +87,8 @@ $html="
       <table class='curriculum'>
             <tr>
                   <th class='sepa' ><b>Formato europeo <br> para el <br> Curriculum <br></b><img class='bandera' src='../../web/img/bandera-europa.png'></th>
-                  <td class='datos'><img class='perfil'src='../../web/img/logo.png'></td>
+                  <td class='datos'>
+                  <img src='http://localhost".$alumno['url']."'></td>
             </tr>
              <tr>
                   <th class='sepa'>Datos</th>

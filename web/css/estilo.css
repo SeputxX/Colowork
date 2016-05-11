@@ -16,6 +16,32 @@
     min-height: 480px;
     padding: 20px;
 }
+td.juego{
+    width: 10px;
+    height: 10px;
+  }
+.muerta{
+  background-color: transparent;
+}
+.viva{
+  background-color: purple;
+}
+.nula{
+  background-color: red;
+}
+h1{
+  text-align: center;
+}
+.imgD{
+  background-color: white;
+  height: 92px;
+  width: 70px;
+  display: inline-block;
+  float: left;
+}
+.imgP{
+  
+}
 .fichaal, .perfil{
   max-width: 80%;
   float: left;
@@ -125,9 +151,6 @@ max-width: 500px;
 .empresas{
   margin: auto !important;
 }
-/*td, th{
-  border: 1px solid black;
-}*/
 .alumnos, .profesores{
 overflow: hidden;
 width:96%; 
@@ -135,9 +158,9 @@ margin:0 auto;
 }
 
 .alumno{
-  text-align: center;
   margin: 10px;
-  width: 340px !important;
+  width: 300px !important;
+  height: 280px;
   float: left;
 }
 .profesor{
@@ -201,4 +224,39 @@ address {
 #footer{
   width: 40%;
   margin: auto !important;
+}
+#barraaceptacion {
+    display:none;
+    position:fixed;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    padding-bottom:20px;
+    width:100%;
+    text-align:center;
+    min-height:40px;
+    background-color: rgba(0, 0, 0, 1);
+    color:#fff;
+    z-index:99999;
+}
+ 
+.inner {
+    width:100%;
+    position:absolute;
+    padding-left:5px;
+    font-family:verdana;
+    font-size:12px;
+    top:30%;
+}
+ 
+.inner a.ok {
+    padding:4px;
+    color:#00ff2e;
+    text-decoration:none;
+}
+ 
+.inner a.info {
+    padding-left:5px;
+    text-decoration:none;
+    color:purple;
 }

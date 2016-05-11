@@ -40,17 +40,16 @@ session_start();
      'aptos' => array('controller' =>'Controller', 'action' =>'aptos'),
      'buscar' => array('controller' =>'Controller', 'action' =>'buscarGeneral'),
      'borrarPerfil' => array ('controller' =>'Controller', 'action'=>'borrarPerfil'),
+     'conLeg' => array ('controller' =>'Controller', 'action'=>'conLeg'),
+     'notfound' => array ('controller' =>'Controller', 'action'=>'notfound'),
  );
 
  // Parseo de la ruta
  if (isset($_GET['ctl'])) {
      if (isset($map[$_GET['ctl']])) {
          $ruta = $_GET['ctl'];
-     } else {
-         header('Status: 404 Not Found');
-         echo '<html><body><h1>Error 404: No existe la ruta <i>' .
-                 $_GET['ctl'] .
-                 '</p></body></html>';
+     } else {    
+         header('Location: index.php?ctl=notfound');
          exit;
      }
  } else {

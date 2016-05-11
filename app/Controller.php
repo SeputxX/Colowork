@@ -637,7 +637,7 @@ class Controller{
                     }elseif($_POST['sexo']=="Hombre"){
                         $url_foto="/colowork/web/img/users/default_male.jpg";
                     }elseif($_POST['sexo']=="Mujer"){
-                        $url_foto="/colowork/web/img/users/default_female.jpg";
+                        $url_foto="/colowork/web/img/users/rsz_default_female.jpg";
                     }
                         if($url_foto!=false){
                         $m->insertarAlumno(
@@ -1000,6 +1000,22 @@ class Controller{
         require __DIR__ . '/templates/modificarFoto.php';
 
     }
+    public function conLeg(){
+        require __DIR__ . '/templates/avisoLegal.php';
+    }
+
+    public function notfound(){
+
+
+        $m = new Model(Config::$pro_bd_nombre, Config::$pro_bd_usuario,
+                         Config::$pro_bd_clave, Config::$pro_bd_hostname);
+        $params=array(
+            'tablero'=>$m->tablero(),
+            'tablero_aux'=>$m->tablero_aux(),
+            );
+        require __DIR__ . '/templates/juegodelavida.php';
+    }
+
 
 }
 

@@ -1,11 +1,7 @@
 <?php ob_start() ?>
 <div class="ficha">
 	
-	<td>
-		<div>
-		<img src="..<?php echo $alumno['url'] ?>" class="perfil">
-	</td>
-	<td></td>
+	<div class="imgD"><img class="imgP"  src="<?php echo $alumno['url'] ?>" class="perfil"></div>
 	
 	<table class="fichaal">
 		<tr>

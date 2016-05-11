@@ -10,15 +10,15 @@
 	    <button type="submit" class="btn btn-default">Buscar</button>
 	</form>
 </div>
-<div class="alumnos">
+<div class="alumnos" >
 	
 				<?php foreach ($params['alumnos'] as $alumno) :?>
 					<table class="alumno">
 					<tr>
-						<td><img src="<?php echo $alumno['url'] ?>" class="perfil"></td>
+						<td><div class="imgD"><img class="imgP"  src="<?php echo $alumno['url'] ?>" class="perfil"></div></td>
 						<th>
 						
-						<b>Nombre: </b><?php echo $alumno['nombre']?>&nbsp<?php echo $alumno['apellidos']?><br>
+						<b>Nombre: </b><?php echo $alumno['nombre']?><br>Apellidos: <?php echo $alumno['apellidos']?><br>
 								
 						</th>
 					</tr>	
@@ -27,8 +27,13 @@
 							<b>Direccion: </b><?php echo $alumno['direccion']?><br>
 							<b>Fecha Nacimiento: </b><?php echo $alumno['fecha']?><br>
 							<b>Estado: </b><?php echo $alumno['estado']?><br>
-							<b>Transporte Propio:</b><?php echo $alumno['transporte']?><br>
-							<b>Titulos: </b><?php echo $alumno['titulos']?>.<br>
+							<b>Transporte Propio: </b><?php echo $alumno['transporte']?><br>
+							<b>Titulos: </b>
+							<ul>
+							<?php foreach ($alumno['titulos'] as $titulo) : ?>
+							<li><?php echo $titulo ?>.</li>
+							<?php endforeach; ?>
+							</ul>
 							<a href="index.php?ctl=verAlumno&id=<?php echo $alumno['iduser'] ?>">Ver Perfil</a>
 						</td>
 					</tr>						

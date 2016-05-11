@@ -15,6 +15,112 @@ function ocultarCompe(){
 	b.style.display="none";
 
 }
+
+function jugar(){
+
+		var tr = document.getElementsByTagName('tr');
+		var td =document.getElementsByTagName('td');
+		var filas= tr.length;
+		var columnas=tr[0].getElementsByTagName('td').length;
+
+		var tablero=new Array(filas);
+		var tablero_aux=new Array(filas);
+
+		function hasClass(el, cls) {
+		  return el.className && new RegExp("(\\s|^)" + cls + "(\\s|$)").test(el.className);
+		}
+
+		for(var x=0;x<filas;x++){
+			tablero[x]=new Array(columnas);
+			tablero_aux[x]=new Array(columnas);
+		}
+
+
+				for (x = 0; x < filas; x++) {				
+					for (y = 0; y < columnas; y++) {
+						if(hasClass(document.getElementsByTagName('tr')[x].getElementsByTagName('td')[y],'viva')){
+							tablero[x][y] = 1;	
+							tablero_aux[x][y] = 1;	
+						}else{
+							tablero[x][y] = 0;	
+							tablero_aux[x][y] = 0;	
+						}
+			  		}
+	  			}
+	  				
+	  			
+	  			
+	  			
+				setInterval(function algoritmo_xy() {
+				
+				for (x = 0; x < filas; x++) {
+					for (y = 0; y < columnas; y++) {
+
+						// Comprueba población alrededor.
+						casillas_on = 0;
+
+						if ( (x-1>=0) && (y-1>=0) && (tablero[x-1][y-1]==1) ) casillas_on++;
+						if ( (y-1>=0) && (tablero[x][y-1]==1) ) casillas_on++;
+						if ( (x+1<filas) && (y-1>=0) && (tablero[x+1][y-1]==1) ) casillas_on++;
+						if ( (x-1>=0) && (tablero[x-1][y]==1) ) casillas_on++;
+						if ( (x+1<filas) && (tablero[x+1][y]==1) ) casillas_on++;
+						if ( (x-1>=0) && (y+1<columnas) && (tablero[x-1][y+1]==1) ) casillas_on++;
+						if ( (y+1<columnas) && (tablero[x][y+1]==1) ) casillas_on++;
+						if ( (x+1<filas) && (y+1<columnas) && (tablero[x+1][y+1]==1) ) casillas_on++;
+
+						// Condiciones de vida.
+						if (casillas_on<2) {		// Si alrededor hay menos de dos celdas vivas,
+							tablero_aux[x][y]=0;	// muere por escasa población.
+						}
+
+						else					
+
+						if (casillas_on>3) {		// Si alrededor hay más de tres celdas vivas,
+							tablero_aux[x][y]=0;	// muere por superporblación.
+						}
+
+						else 
+
+						if (casillas_on==3) {		// Si alrededor hay tres celdas vivas,
+							tablero_aux[x][y]=1;	// vive (sigue viviendo o se crea vida).
+						}
+
+			  		}
+	  			}
+
+	  			copiar (tablero_aux, tablero);
+	  			mostrar();
+	  				
+	  			},100);
+				
+	  			//document.getElementById('a1').innerHTML=JSON.stringify(tablero_aux);
+
+			function mostrar () {
+				for (x = 0; x < filas; x++) {
+					
+					for (y = 0; y < columnas; y++) {
+
+						if (tablero[x][y] == 0)	{
+			  				document.getElementsByTagName('tr')[x].getElementsByTagName('td')[y].setAttribute("class", "juego");
+						}
+			  			else{
+			  				document.getElementsByTagName('tr')[x].getElementsByTagName('td')[y].setAttribute("class","juego viva");
+			  			}
+			  		}
+	  			}
+			}
+			function copiar (origen, destino) {
+				for (x = 0; x < filas; x++) {
+					for (y = 0; y < columnas; y++) {
+						destino[x][y] = origen[x][y];
+			  		}
+	  			}
+
+			}
+
+			
+	}
+
 function avisarBorrado(){
 	var flag = confirm("¿Esta seguro de que desea borrar su perfil en ColoWork?")
 
@@ -109,4 +215,47 @@ function alumnosAptos(pos,idcom){
 			    var b = document.getElementById('alumnos').innerHTML=can;
 			}
 		}	
+}
+	function getCookie2(c_name){
+    var c_value = document.cookie;
+    var c_start = c_value.indexOf(" " + c_name + "=");
+    if (c_start == -1){
+        c_start = c_value.indexOf(c_name + "=");
+    }
+    if (c_start == -1){
+        c_value = null;
+    }else{
+        c_start = c_value.indexOf("=", c_start) + 1;
+        var c_end = c_value.indexOf(";", c_start);
+        if (c_end == -1){
+            c_end = c_value.length;
+        }
+        c_value = unescape(c_value.substring(c_start,c_end));
+    }
+    return c_value;
+}
+ 
+function setCookie2(c_name,value,exdays){
+    var exdate=new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+    document.cookie=c_name + "=" + c_value;
+}
+ 
+
+function PonerCookie(){
+    setCookie2('tiendaaviso','1',365);
+    document.getElementById("barraaceptacion").style.display="none";
+}
+
+
+window.onload = function () {
+
+if(getCookie2('tiendaaviso')!="1"){
+	document.getElementById("barraaceptacion").style.display="block";
+}
+
+$('.imgP').each(function(){
+	$(this).css("margin-top",((92-$(this).height())/2));
+});
 }
