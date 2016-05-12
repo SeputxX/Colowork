@@ -11,25 +11,28 @@
 	</form>
 </div>
 <div class="ofertas">
-	<table>	
+		
 				<?php foreach ($params['ofertas'] as $oferta) :?>
-					<tr><th class="ttabla">Oferta de<a href="index.php?ctl=verEmpresa&id=<?php echo $oferta['iduser'] ?>"> <?php echo $oferta['nombre'] ?></a></th></tr>
-					<tr class="endOfe">
-						<td>
-							<h3><?php echo $oferta['titulo'] ?></h3>
-							<b><?php echo $oferta['zona'] ?></b>
-							<p class="descof"><?php echo $oferta['descripcion'] ?></p>
-							<b>Competencias exigidas</b>
-							<p class="descof"><ul><li><?php echo $oferta['competencias'] ?></ul></p>
-							<ul>
-								<li class="divider"><?php echo $oferta['contrato'] ?></li>
-								<li class="divider"><?php echo $oferta['jornada'] ?></li> 
-								<li class="divider"><?php echo $oferta['salario'] ?></li>
-							</ul>
-						</td>
-					</tr>
+					<div class="oferta">
+						<div class="titOfe">
+							Oferta de<a href="index.php?ctl=verEmpresa&id=<?php echo $oferta['iduser'] ?>"> <?php echo $oferta['nombre'] ?></a>
+						</div>
+						<div class="endOfe">
+								<h3><?php echo $oferta['titulo'] ?></h3>
+								<b><?php echo $oferta['zona'] ?></b>
+								<p class="descof"><?php echo $oferta['descripcion'] ?></p>
+								<b>Competencias exigidas</b>
+								<p class="descof"><ul><li><?php echo $oferta['competencias'] ?></ul></p>
+								<ul>
+									<li class="divider"><?php echo $oferta['contrato'] ?></li>
+									<li class="divider"><?php echo $oferta['jornada'] ?></li> 
+									<li class="divider"><?php echo $oferta['salario'] ?></li>
+								</ul>
+						</div>
+					</div>
+						
 				<?php endforeach; ?>
-	</table>
+	
 </div>
 <?php $contenido = ob_get_clean() ?>
 <?php include 'layout.php' ?>

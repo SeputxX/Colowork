@@ -389,7 +389,7 @@ class Controller{
 
         $params = array(
              'empresas' => $m->dameEmpresas(),
-             'mensaje'=>"Solo se mostaran aquellas ofertas que tengan alguna oferta activa."
+             
          );
 
          require __DIR__ . '/templates/mostrarEmpresas.php';

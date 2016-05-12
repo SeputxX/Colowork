@@ -7,9 +7,9 @@
       <form class="form-signin" method="POST" action="index.php?ctl=login">
       <div class="container login">
         <h2 class="form-signin-heading">Inicio Sesion</h2>
-        <label for="inputEmail" >Usuario</label>
+        <label  class="loginText" for="inputEmail" >Usuario</label>
         <input type="text" name="user" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword">Contraseña</label>
+        <label class="loginText" for="inputPassword">Contraseña</label>
         <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required>
         <!-- <div class="checkbox">
           <label>

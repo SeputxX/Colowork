@@ -7,47 +7,69 @@
 		<tr>
 			<th>Usuario:</th>
 			<td>
-				<input type="text" name="user" value="<?php echo $params['user'] ?>" pattern="([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\ ]){2,50}" required/>(Solo letras max 50)
+				<input type="text" name="user" value="<?php echo $params['user'] ?>" pattern="([a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\ ]){2,50}" required/>
 			</td>
 		</tr>
+		<tr><td colspan="2">Solo letras max 50</td></tr>
 		<tr>
 			<th>Clave Acceso:</th>
 			<td>
-				<input type="password" name="pass" value="<?php echo $params['pass'] ?>" pattern="[A-Za-z0-9!?-]{8,20}" required />(Letras y Numeros. Min 8 Max 20)
+				<input type="password" name="pass" value="<?php echo $params['pass'] ?>" pattern="[A-Za-z0-9!?-]{8,20}" required />
 			</td>
+		</tr>
+		<tr>
+			<td colspan="2">Letras y Numeros Min 8 Max 20</td>
 		</tr>
 		<tr>
 			<th>Nombre:</th>
 			<td>
-				<input type="text" name="nombre" value="<?php echo $params['nombre'] ?>" pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]){2,50}" required/>(Solo letras max 50)
+				<input type="text" name="nombre" value="<?php echo $params['nombre'] ?>" pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]){2,50}" required/>
 			</td>
+		</tr>
+		<tr>
+			<td colspan="2">Solo letras max 50</td>
 		</tr>
 		<tr>
 			<th>Apellidos</th>
 			<td>
-				<input type="text" name="apellidos" value="<?php echo $params['apellidos'] ?>" pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]){2,100}" required/>(Solo letras max 100)
+				<input type="text" name="apellidos" value="<?php echo $params['apellidos'] ?>" pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]){2,100}" required/>
 			</td>
 		</tr>
 		<tr>
-			<th>Direccion:</th><td><input type="text" name="direccion" value="<?php echo $params['direccion'] ?>" pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]){2,100}" required/>(solo letras max 100)</td>
+			<td colspan="2">Solo letras max 100</td>
+		</tr>
+		<tr>
+			<th>Direccion:</th><td><input type="text" name="direccion" value="<?php echo $params['direccion'] ?>" pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]){2,100}" required/></td>
+		</tr>
+		<tr>
+			<td colspan="2">Solo letras max 100</td>
 		</tr>
 		<tr>
 			<th>Correo: </th>
 			<td>
-				<input type="text" name="correo" value="<?php echo $params['correo'] ?>" pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" required/>(example@loquesea.algo)
+				<input type="text" name="correo" value="<?php echo $params['correo'] ?>" pattern="^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$" required/>
 			</td>
+		</tr>
+		<tr>
+			<td colspan="2">example@loquesea.algo</td>
 		</tr>
 		<tr>
 			<th>Nacionalidad:</th>
 			<td>
-				<input type="text" name="nacionalidad" value="<?php echo $params['nacionalidad'] ?>" pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]|\s){2,50}" required/>(Solo letras max 50)
+				<input type="text" name="nacionalidad" value="<?php echo $params['nacionalidad'] ?>" pattern="([a-zA-ZñÑáéíóúÁÉÍÓÚ\ ]|\s){2,50}" required/>
 			</td>
+		</tr>
+		<tr>
+			<td colspan="2">Solo letras max 50</td>
 		</tr>
 		<tr>
 			<th>Fecha nacimiento</th>
 			<td>
-				<input type="text" pattern="^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$" name="fecha" value="<?php echo $params['fecha'] ?>"required/>(dd/mm/aaaa)
+				<input type="text" pattern="^([0][1-9]|[12][0-9]|3[01])(\/|-)([0][1-9]|[1][0-2])\2(\d{4})$" name="fecha" value="<?php echo $params['fecha'] ?>"required/>
 			</td>
+		</tr>
+		<tr>
+			<td colspan="2">dd/mm/aaaa</td>
 		</tr>
 		<tr><th>Sexo</th>
 		<td>
@@ -56,6 +78,9 @@
 				<option value="Mujer" <?php if(isset($_POST['sexo'])){ if($_POST['sexo']=='Mujer'){ echo "selected";}}?>>Mujer</option>
 			</select>
 		</td>
+	</tr>
+	<tr>
+		<td colspan="2"></td>
 	</tr>
 	
 	<tr>
@@ -191,19 +216,21 @@
 	<tr>
 		<th>Otras Informaciones</th>
 		<td>
-			<textarea name="otros"><?php echo $params['otros'] ?></textarea>(max 500)
+			<textarea name="otros"><?php echo $params['otros'] ?></textarea>
 		</td>
 	</tr>
 	<tr>
 		<th>Codigo Centro:</th>
 		<td>
-			<input type="text" name="codigo" value="<?php echo $params['codigo'] ?>" pattern="[a-zA-Z0-9]{6}">(Numero y letras 6 caracteres)Codigo sacolomina Q2W3E4</td>
+			<input type="text" name="codigo" value="<?php echo $params['codigo'] ?>" pattern="[a-zA-Z0-9]{6}"></td>
+	</tr>
+	<tr>
+		<td colspan="2">Numero y letras 6 caracteres Codigo sacolomina Q2W3E4</td>
 	</tr>
 	<tr>
 		<th>Foto de Perfil</th>
 		<td><input type="file" name="foto" /></td>
-	</tr>
-		
+	</tr>		
 		<input type="hidden" name="rol" value="alumno"/>
 		
 	</table>

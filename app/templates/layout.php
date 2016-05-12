@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="<?php echo 'css/'.Config::$pro_vis_css ?>" />
+    <link rel="shortcut icon" href="../web/img/favico/favicon.ico" type="image/x-icon"/>
     <link href="../web/css/bootstrap.min.css" rel="stylesheet">
     <script type="text/javascript" src="js/script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -25,7 +26,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             </button>            
-            <a class="navbar-brand"  href="index.php?ctl=inicio"><img class="logo" src="../web/img/logo.png"></a>
+            <a class="navbar-brand"  href="index.php?ctl=inicio"><img class="logo" src="../web/img/logos/1_Primary_logo_on_transparent_197x75.png"></a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

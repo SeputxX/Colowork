@@ -74,9 +74,7 @@ class Model {
   }
 
   public function dameEmpresas(){
-      $sql = "SELECT col_empresas.iduser,col_empresas.nombre, col_empresas.actividad, col_empresas.idfiscal, col_empresas.razon, col_empresas.direccion, col_empresas.poblacion ,col_empresas.pais, col_empresas.provincia, col_empresas.codpostal, col_empresas.telefono, col_empresas.fax, col_empresas.ofertas,col_empresas.correo, COUNT(*) as numofe
-       FROM col_empresas JOIN col_ofertas ON col_empresas.iduser=col_ofertas.iduser GROUP BY col_empresas.iduser";
-
+      $sql = "SELECT col_empresas.iduser,col_empresas.nombre, col_empresas.actividad, col_empresas.idfiscal, col_empresas.razon, col_empresas.direccion, col_empresas.poblacion ,col_empresas.pais, col_empresas.provincia, col_empresas.codpostal, col_empresas.telefono, col_empresas.fax, col_empresas.ofertas,col_empresas.correo FROM col_empresas";
       $result = mysql_query($sql, $this->conexion);
 
       $empresas = array();
