@@ -1,12 +1,5 @@
 <?php ob_start(); ?>
-<p id="a1"></p>
-<p id="a2"></p>
-<p id="a3"></p>
-<p id="a4"></p>
-<p id="a5"></p>
-<p id="a6"></p>
-<p id="a7"></p>
-<table>
+<table onclick="jugar()">
 	<tbody>
 		<tr>
 			<td  class="juego"></td>

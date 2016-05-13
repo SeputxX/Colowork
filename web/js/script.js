@@ -47,11 +47,8 @@ function jugar(){
 						}
 			  		}
 	  			}
-	  				
-	  			
-	  			
-	  			
-				setInterval(function algoritmo_xy() {
+
+	  			function algoritmo_xy() {
 				
 				for (x = 0; x < filas; x++) {
 					for (y = 0; y < columnas; y++) {
@@ -91,7 +88,12 @@ function jugar(){
 	  			copiar (tablero_aux, tablero);
 	  			mostrar();
 	  				
-	  			},100);
+	  			}
+	  				
+	  			
+	  			
+	  			
+				
 				
 	  			//document.getElementById('a1').innerHTML=JSON.stringify(tablero_aux);
 
@@ -117,6 +119,12 @@ function jugar(){
 	  			}
 
 			}
+
+			setTimeout(function (){
+				algoritmo_xy();
+				setInterval(function (){algoritmo_xy()},100);
+			},3000);
+			
 
 			
 	}
