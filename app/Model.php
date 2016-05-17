@@ -4,14 +4,13 @@ class Model {
 
   public function __construct($dbname,$dbuser,$dbpass,$dbhost){
 
-    $pro_bd_conexion = mysql_connect($dbhost, $dbuser, $dbpass);
+    $pro_bd_conexion = mysqli_connect($dbhost, $dbuser, $dbpass,$dbname);
 
     if (!$pro_bd_conexion) {
-      die('No ha sido posible realizar la conexión con la base de datos: ' . mysql_error());
+      die('No ha sido posible realizar la conexión con la base de datos: ' . mysqli_error());
     }
-    mysql_select_db($dbname, $pro_bd_conexion);
 
-    mysql_set_charset('utf8');
+    mysqli_set_charset($pro_bd_conexion, 'utf8');
 
     $this->conexion = $pro_bd_conexion;
   }
@@ -23,8 +22,8 @@ class Model {
 
     $query="SELECT count(*) AS coin FROM col_usuarios where user='$user' AND pass='$pass';";
 
-    $result = mysql_query($query, $this->conexion);
-    $row = mysql_fetch_assoc($result);
+    $result = mysqli_query($this->conexion,$query);
+    $row = mysqli_fetch_assoc($result);
 
     return $row['coin'];
 
@@ -32,16 +31,16 @@ class Model {
   public function getAct($id){
     $query="SELECT ofertas FROM col_empresas where iduser='$id';";
 
-    $result = mysql_query($query, $this->conexion);
-    $row = mysql_fetch_assoc($result);
+    $result = mysqli_query($this->conexion,$query);
+    $row = mysqli_fetch_assoc($result);
 
     return $row['ofertas'];
   }
   public function datosUsuario($user){
     $query="SELECT iduser,rol FROM col_usuarios WHERE user='$user';";
 
-    $result = mysql_query($query, $this->conexion);
-    $row = mysql_fetch_assoc($result);
+    $result = mysqli_query($this->conexion,$query);
+    $row = mysqli_fetch_assoc($result);
 
     return $row;
   }
@@ -49,19 +48,19 @@ class Model {
   public function dameAlumnos(){
       $sql = "select col_alumnos.fecha,col_alumnos.iduser,col_usuarios.url, col_alumnos.nombre, col_alumnos.apellidos,col_alumnos.direccion,col_alumnos.estado,col_alumnos.transporte from col_alumnos join col_usuarios on col_alumnos.iduser=col_usuarios.iduser order by nombre asc";
 
-      $result = mysql_query($sql, $this->conexion);
+      $result = mysqli_query($this->conexion,$sql);
 
       if($result){
 
         $alumnos = array();
 
-        while ($row = mysql_fetch_assoc($result)){
+        while ($row = mysqli_fetch_assoc($result)){
           $iduser=$row['iduser'];
           $sql2 = "select col_ciclos.nombre from col_ciclos join col_alum_ciclo on col_alum_ciclo.idciclo=col_ciclos.idciclo where iduser=$iduser";
-          $result2 = mysql_query($sql2, $this->conexion);
+          $result2 = mysqli_query($this->conexion,$sql2);
           $ciclos=array();
           if($result2){
-            while ($row2 = mysql_fetch_assoc($result2)){
+            while ($row2 = mysqli_fetch_assoc($result2)){
               $ciclos[]=$row2['nombre'];          
             }
             //$titulos=implode('<br>', $ciclos);
@@ -75,11 +74,11 @@ class Model {
 
   public function dameEmpresas(){
       $sql = "SELECT col_empresas.iduser,col_empresas.nombre, col_empresas.actividad, col_empresas.idfiscal, col_empresas.razon, col_empresas.direccion, col_empresas.poblacion ,col_empresas.pais, col_empresas.provincia, col_empresas.codpostal, col_empresas.telefono, col_empresas.fax, col_empresas.ofertas,col_empresas.correo FROM col_empresas";
-      $result = mysql_query($sql, $this->conexion);
+      $result = mysqli_query($this->conexion,$sql);
 
       $empresas = array();
       
-      while ($row = mysql_fetch_assoc($result)){
+      while ($row = mysqli_fetch_assoc($result)){
         $empresas[] = $row;
       }    
     
@@ -108,7 +107,7 @@ class Model {
 
 
          $query="INSERT INTO `col_usuarios`(`user`,`pass`,`rol`) VALUES('$user','$pass','$rol')";
-         $result = mysql_query($query, $this->conexion); 
+         $result = mysqli_query($this->conexion,$query); 
                  
          
          if ($result) {
@@ -118,7 +117,7 @@ class Model {
            $query= "
            INSERT INTO `col_empresas`(`iduser`, `nombre`, `actividad`, `idfiscal`, `razon`, `direccion`, `poblacion`, `pais`, `provincia`, `codpostal`, `telefono`, `fax`, `ofertas`, `correo`, `cod_act`) VALUES
            ('$iduser','$n','$a','$idf','$r','$d','$p','$pais','$pro','$cod',$tel,$fax,'$es','$correo','$cod_act');";
-           $result = mysql_query($query, $this->conexion);
+           $result = mysqli_query($this->conexion,$query);
            //var_dump($result);
          }
          return $result;
@@ -129,7 +128,7 @@ class Model {
         $cod_act=$_GET['id'];
 
         $query="UPDATE `col_empresas` SET `ofertas`='si' WHERE `cod_act`='$cod_act'";
-        $result=mysql_query($query);
+        $result=mysqli_query($this->conexion,$query);
 
         return $result;
      }
@@ -138,7 +137,7 @@ class Model {
         $cod_act=$_GET['id'];
 
         $query="UPDATE `col_ofertas` SET `activa`='si' WHERE `idoferta`='$cod_act'";
-        $result=mysql_query($query);
+        $result=mysqli_query($this->conexion,$query);
 
         return $result;
      }
@@ -149,9 +148,9 @@ class Model {
 
        $query="SELECT * FROM col_empresas where iduser=$id";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
-       $row = mysql_fetch_assoc($result);
+       $row = mysqli_fetch_assoc($result);
 
        return $row;
 
@@ -172,13 +171,13 @@ class Model {
        }
       $query=$query." GROUP BY col_alumnos.iduser;";
 
-      $result = mysql_query($query, $this->conexion);
+      $result = mysqli_query($this->conexion,$query);
 
       if($result){
 
         $alumnos=array();
 
-        while($row = mysql_fetch_assoc($result)){
+        while($row = mysqli_fetch_assoc($result)){
           if($row['cantidad']==$cant-1){          
             $alumnos[]=$row;
           }
@@ -192,8 +191,8 @@ class Model {
     public function dameUrlFoto($id){
 
         $query="SELECT url FROM col_usuarios where iduser=$id";
-        $result = mysql_query($query, $this->conexion);
-        $row = mysql_fetch_assoc($result)['url'];
+        $result = mysqli_query($this->conexion,$query);
+        $row = mysqli_fetch_assoc($result)['url'];
         
         return $row;
     }
@@ -201,9 +200,9 @@ class Model {
 
        $query="SELECT col_alumnos.iduser,col_alumnos.nombre,col_alumnos.apellidos,col_alumnos.sexo,col_alumnos.direccion,col_alumnos.correo,col_alumnos.nacionalidad,col_alumnos.fecha,col_alumnos.estado,col_alumnos.transporte,col_alumnos.otros,col_usuarios.url FROM col_alumnos JOIN col_usuarios on col_alumnos.iduser=col_usuarios.iduser where col_alumnos.iduser=$id";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
-       $row = mysql_fetch_assoc($result);
+       $row = mysqli_fetch_assoc($result);
 
        $array=$this->dameTitulosAlu($id);
        $idiomas=$this->dameIdiomasAlu($id);
@@ -220,10 +219,10 @@ class Model {
 
     $query="select col_usuarios.iduser, col_alum_idiomas.nombre,col_alum_idiomas.fecha,col_alum_idiomas.nivel_hablado,col_alum_idiomas.nivel_escrito 
     FROM col_usuarios JOIN col_alum_idiomas ON col_usuarios.iduser=col_alum_idiomas.iduser where col_usuarios.iduser=$id";
-    $result=mysql_query($query,$this->conexion);
+    $result=mysqli_query($this->conexion,$query);
 
     $idiomas=array();
-       while($row = mysql_fetch_assoc($result)){
+       while($row = mysqli_fetch_assoc($result)){
        
         $idiomas[]=$row;
        }
@@ -235,10 +234,10 @@ class Model {
 
     $query="select col_usuarios.iduser, col_alum_experiencia.descripcion,col_alum_experiencia.ffinal,col_alum_experiencia.finicio FROM col_usuarios JOIN col_alum_experiencia ON col_usuarios.iduser=col_alum_experiencia.iduser where col_usuarios.iduser=$id
 ";
-    $result=mysql_query($query,$this->conexion);
+    $result=mysqli_query($this->conexion,$query);
 
     $experiencia=array();
-       while($row = mysql_fetch_assoc($result)){
+       while($row = mysqli_fetch_assoc($result)){
        
         $experiencia[]=$row;
        }
@@ -250,9 +249,9 @@ class Model {
 
       $query="SELECT col_ciclos.nombre FROM col_alumnos join col_alum_ciclo on col_alumnos.iduser=col_alum_ciclo.iduser join col_ciclos on col_ciclos.idciclo=col_alum_ciclo.idciclo where col_alumnos.iduser=$id";
 
-      $result = mysql_query($query, $this->conexion);
+      $result = mysqli_query($this->conexion,$query);
       $titulos=array();
-       while($row = mysql_fetch_assoc($result)){
+       while($row = mysqli_fetch_assoc($result)){
        
         $titulos[]=$row['nombre'];
        }
@@ -264,9 +263,9 @@ class Model {
 
       $query="SELECT col_ciclos.idciclo FROM col_alumnos join col_alum_ciclo on col_alumnos.iduser=col_alum_ciclo.iduser join col_ciclos on col_ciclos.idciclo=col_alum_ciclo.idciclo where col_alumnos.iduser=$id";
 
-      $result = mysql_query($query, $this->conexion);
+      $result = mysqli_query($this->conexion,$query);
       $titulos=array();
-       while($row = mysql_fetch_assoc($result)){
+       while($row = mysqli_fetch_assoc($result)){
        
         $titulos[]=$row['idciclo'];
        }
@@ -276,11 +275,11 @@ class Model {
      }
       public function modificarCentro($id,$n,$a,$c,$o){
         $query="UPDATE `col_profesores` SET `nombre`='$n',`apellidos`='$a',`correo`='$c',`ocupacion`='$o' WHERE iduser=$id";
-        if($result=mysql_query($query)){
+        if($result=mysqli_query($this->conexion,$query)){
           $id=$this->getIdUser($_SESSION['user']);
           
           $query="UPDATE col_usuarios SET user='$n' WHERE iduser='$id'";
-          $result=mysql_query($query);
+          $result=mysqli_query($this->conexion,$query);
           
         }
         return $result;
@@ -303,18 +302,18 @@ class Model {
         $id=$_SESSION['id'];
         $query="UPDATE col_alumnos 
                 SET nombre='$nombre',apellidos='$apellidos',direccion='$direccion', correo='$correo', nacionalidad='$nacionalidad', fecha='$fecha', sexo='$sexo', idiomas='$idiomas', estado='$estado',transporte='$transporte', experiencia='$experiencia',otros='$otros' WHERE iduser=$id;";
-        $result=mysql_query($query);
+        $result=mysqli_query($this->conexion,$query);
         //var_dump($result);
         if($result){          
           
           $query="UPDATE col_usuarios SET user='$user' WHERE iduser='$id'";
-          $result=mysql_query($query);
+          $result=mysqli_query($this->conexion,$query);
           //var_dump($result);
 
           if($result){
 
             $query="DELETE FROM `col_alum_ciclo` WHERE iduser=$id";
-            $result=mysql_query($query);
+            $result=mysqli_query($this->conexion,$query);
             //var_dump($result);
 
             if($result){
@@ -323,7 +322,7 @@ class Model {
 
                 $idti=$this->getIdTitulo($valor);              
                 $query="INSERT INTO col_alum_ciclo(iduser,idciclo) VALUES($id,$idti);";
-                $result= mysql_query($query, $this->conexion);
+                $result= mysqli_query($this->conexion,$query);
                 //var_dump($result);
             }
           } 
@@ -349,14 +348,14 @@ class Model {
         $user=htmlspecialchars($user);
         $correo=htmlspecialchars($correo);        
         $query="UPDATE `col_empresas` SET `nombre`='$n',`actividad`='$a',`idfiscal`=$idf,`razon`='$r',`direccion`='$d',`poblacion`='$p',`pais`='$pais',`provincia`='$pro',`codpostal`='$cod',`telefono`=$tel,`fax`=$fax,`correo`='$correo' WHERE  iduser=$id;";
-        $result=mysql_query($query);
+        $result=mysqli_query($this->conexion,$query);
         //var_dump($result);
         if($result){
          
           $id=$this->getIdUser($_SESSION['user']);
           
           $query="UPDATE col_usuarios SET user='$user' WHERE iduser=$id";
-          $result=mysql_query($query);
+          $result=mysqli_query($this->conexion,$query);
 
         }
         return $result;
@@ -365,9 +364,9 @@ class Model {
       
        $query="SELECT * FROM col_profesores where iduser=$id";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
-       $row = mysql_fetch_assoc($result);
+       $row = mysqli_fetch_assoc($result);
 
        return $row;
 
@@ -376,9 +375,9 @@ class Model {
       
        $query="SELECT iduser FROM col_usuarios where user='$user'";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
-       $row = mysql_fetch_assoc($result)['iduser'];
+       $row = mysqli_fetch_assoc($result)['iduser'];
 
        return $row;
      }
@@ -388,9 +387,9 @@ class Model {
         FROM col_alum_ciclo JOIN col_ciclos ON col_alum_ciclo.idciclo=col_ciclos.idciclo 
           JOIN col_competencias ON col_ciclos.idciclo=col_competencias.idciclo
             where iduser=$id";
-      $result = mysql_query($query, $this->conexion);
+      $result = mysqli_query($this->conexion,$query);
       $competencias=array();
-       while ($row = mysql_fetch_assoc($result))
+       while ($row = mysqli_fetch_assoc($result))
          {
              $competencias[] = $row['nombre'];
          }
@@ -403,9 +402,9 @@ class Model {
 
       $query="SELECT idcompetencia FROM col_competencias where nombre='$nombre'";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
-       $row = mysql_fetch_assoc($result)['idcompetencia'];        
+       $row = mysqli_fetch_assoc($result)['idcompetencia'];        
 
        return $row;
 
@@ -415,9 +414,9 @@ class Model {
 
       $query="SELECT max(idoferta) as id FROM col_ofertas";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
-       $row = mysql_fetch_assoc($result)['id'];        
+       $row = mysqli_fetch_assoc($result)['id'];        
 
        return $row;
 
@@ -428,9 +427,9 @@ class Model {
 
        $query="SELECT nombre FROM col_actividades";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
        $actividades = array();
-       while ($row = mysql_fetch_assoc($result))
+       while ($row = mysqli_fetch_assoc($result))
          {
              $actividades[] = $row;
          }
@@ -442,9 +441,9 @@ class Model {
 
         $query="SELECT nombre FROM col_empresas where iduser=$id";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
-       $row = mysql_fetch_assoc($result)['nombre'];        
+       $row = mysqli_fetch_assoc($result)['nombre'];        
 
        return $row;
 
@@ -453,9 +452,9 @@ class Model {
 
         $query="SELECT nombre FROM col_contratos";
 
-        $result = mysql_query($query, $this->conexion);
+        $result = mysqli_query($this->conexion,$query);
         $contratos=array();
-        while($row = mysql_fetch_assoc($result)){
+        while($row = mysqli_fetch_assoc($result)){
           $contratos[]=$row;
         }
           return $contratos;
@@ -477,7 +476,7 @@ class Model {
          //echo $t."<br> ".$d."<br> ".$u."<br> ".$c."<br> ".$j."<br> ".$s."<br> ".$ide."<br> ".$competencias."<br> "."<br>no"." <br>".$cod_act;
          $query= "INSERT INTO `col_ofertas`(`titulo`, `descripcion`, `contrato`, `jornada`, `salario`, `iduser`, `competencias`,`zona`,`activa`,`cod_act`)
           VALUES ('$t','$d','$c','$j','$s','$ide','$competencias','$z','no','$cod_act')";
-          $result = mysql_query($query, $this->conexion);
+          $result = mysqli_query($this->conexion,$query);
           var_dump($result);
          if($result){
           for($i=0;$i<count($compe);$i++){
@@ -485,7 +484,7 @@ class Model {
             $idc=$this->getIdCompetencia($compe[$i]);
             $query= "INSERT INTO `col_oferta_competencia`(`idoferta`, `idcompetencia`)
                         VALUES($ido,$idc) ";
-                        $result = mysql_query($query, $this->conexion);
+                        $result = mysqli_query($this->conexion,$query);
           }
         }
 
@@ -526,18 +525,18 @@ class Model {
             OR `competencias` LIKE '%".$buscar."%' 
             OR `zona` LIKE '%".$buscar."%'";
 
-      $result = mysql_query($query, $this->conexion);
+      $result = mysqli_query($this->conexion,$query);
 
        $ofertas = array();
        if($result){
-         while ($row = mysql_fetch_assoc($result)){
+         while ($row = mysqli_fetch_assoc($result)){
 
           $idoferta=$row['idoferta'];
           $query2="SELECT col_competencias.nombre FROM `col_competencias` join col_oferta_competencia on col_competencias.idcompetencia=col_oferta_competencia.idcompetencia 
           WHERE col_oferta_competencia.idoferta='$idoferta'";
-          $result2 = mysql_query($query2, $this->conexion);
+          $result2 = mysqli_query($this->conexion,$query2);
           $compe=array();
-          while ($row2 = mysql_fetch_assoc($result2)){
+          while ($row2 = mysqli_fetch_assoc($result2)){
             $compe[] = $row2['nombre'];          
           }
           $competencias=implode('</li><li>', $compe);
@@ -557,10 +556,10 @@ class Model {
            OR `correo` LIKE '%".$buscar."%' 
            OR `ocupacion` LIKE '%".$buscar."%'";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
        $profesores = array();
-         while ($row = mysql_fetch_assoc($result))
+         while ($row = mysqli_fetch_assoc($result))
          {
              $profesores[] = $row;
          }
@@ -584,19 +583,19 @@ class Model {
            OR `idiomas` LIKE '%".$buscar."%' 
            OR `otros` LIKE '%".$buscar."%'";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
        if($result){
 
         $alumnos = array();
 
-        while ($row = mysql_fetch_assoc($result)){
+        while ($row = mysqli_fetch_assoc($result)){
           $iduser=$row['iduser'];
           $sql2 = "select col_ciclos.nombre from col_ciclos join col_alum_ciclo on col_alum_ciclo.idciclo=col_ciclos.idciclo where iduser=$iduser";
-          $result2 = mysql_query($sql2, $this->conexion);
+          $result2 = mysqli_query($this->conexion,$sql2);
           $ciclos=array();
           if($result2){
-            while ($row2 = mysql_fetch_assoc($result2)){
+            while ($row2 = mysqli_fetch_assoc($result2)){
               $ciclos[]=$row2['nombre'];          
             }
             $titulos=implode('<br>', $ciclos);
@@ -622,10 +621,10 @@ class Model {
            OR `codpostal` LIKE '%".$buscar."%' 
            OR `correo` LIKE '%".$buscar."%'";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
        $empresas = array();
-         while ($row = mysql_fetch_assoc($result))
+         while ($row = mysqli_fetch_assoc($result))
          {
              $empresas[] = $row;
          }
@@ -641,18 +640,18 @@ class Model {
 
        $query="SELECT * FROM col_ofertas where iduser=$id";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
        $ofertas = array();
        if($result){
-         while ($row = mysql_fetch_assoc($result)){
+         while ($row = mysqli_fetch_assoc($result)){
 
           $idoferta=$row['idoferta'];
           $query2="SELECT col_competencias.nombre FROM `col_competencias` join col_oferta_competencia on col_competencias.idcompetencia=col_oferta_competencia.idcompetencia 
           WHERE col_oferta_competencia.idoferta='$idoferta'";
-          $result2 = mysql_query($query2, $this->conexion);
+          $result2 = mysqli_query($this->conexion,$query2);
           $compe=array();
-          while ($row2 = mysql_fetch_assoc($result2)){
+          while ($row2 = mysqli_fetch_assoc($result2)){
             $compe[] = $row2['nombre'];          
           }
           $competencias=implode('</li><li>', $compe);
@@ -669,18 +668,18 @@ class Model {
        $query="SELECT zona,idoferta, `titulo`,`descripcion`,`zona`,`contrato`,`jornada`,`salario`,col_empresas.iduser , col_empresas.nombre 
                 FROM `col_ofertas` JOIN col_empresas on col_ofertas.iduser=col_empresas.iduser WHERE activa='si'";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
        $ofertas = array();
        if($result){
-         while ($row = mysql_fetch_assoc($result)){
+         while ($row = mysqli_fetch_assoc($result)){
 
           $idoferta=$row['idoferta'];
           $query2="SELECT col_competencias.nombre FROM `col_competencias` join col_oferta_competencia on col_competencias.idcompetencia=col_oferta_competencia.idcompetencia 
           WHERE col_oferta_competencia.idoferta='$idoferta'";
-          $result2 = mysql_query($query2, $this->conexion);
+          $result2 = mysqli_query($this->conexion,$query2);
           $compe=array();
-          while ($row2 = mysql_fetch_assoc($result2)){
+          while ($row2 = mysqli_fetch_assoc($result2)){
             $compe[] = $row2['nombre'];          
           }
           $competencias=implode('</li><li>', $compe);
@@ -699,10 +698,10 @@ class Model {
 
        $query="SELECT * FROM col_ciclos";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
        //$return=array();
        $titulos = array();
-       while ($row = mysql_fetch_assoc($result))
+       while ($row = mysqli_fetch_assoc($result))
          {
              $titulos[] = $row;
          }
@@ -714,8 +713,8 @@ class Model {
       public function comprobarUser($user){
 
         $query="SELECT COUNT(*) AS coin FROM `col_usuarios` WHERE user='$user'";
-        $result= mysql_query($query, $this->conexion);
-        $row=mysql_fetch_assoc($result)['coin'];
+        $result= mysqli_query($this->conexion,$query);
+        $row=mysqli_fetch_assoc($result)['coin'];
         
         return $row;
       }
@@ -785,8 +784,8 @@ class Model {
       public function comprobarEmpresa($n){
       
         $query="SELECT COUNT(*) as coin FROM `col_empresas` WHERE `nombre`='$n'";
-        $result = mysql_query($query, $this->conexion);
-        $fila = mysql_fetch_assoc($result);
+        $result = mysqli_query($this->conexion,$query);
+        $fila = mysqli_fetch_assoc($result);
       
       return $fila['coin'];
      }
@@ -794,8 +793,8 @@ class Model {
       public function comprobarCodigo($codigo){
 
         $query="SELECT count(*) as coin FROM `col_codigo_centro` WHERE codigo='$codigo'";
-        $result = mysql_query($query, $this->conexion);
-        $row = mysql_fetch_assoc($result)['coin'];
+        $result = mysqli_query($this->conexion,$query);
+        $row = mysqli_fetch_assoc($result)['coin'];
         return $row;
       }
 
@@ -818,7 +817,7 @@ class Model {
         $o=htmlspecialchars($o);
 
         $query1="INSERT INTO `col_usuarios`(`user`,`pass`,`rol`,`url`) VALUES('$user','$pass','$rol','$foto')";
-        $result1 = mysql_query($query1, $this->conexion);
+        $result1 = mysqli_query($this->conexion,$query1);
         
         if($result1){
           $iduser=$this->getIdUser($user);
@@ -827,7 +826,7 @@ class Model {
           $query="INSERT INTO `col_alumnos`(`iduser`, `nombre`, `apellidos`, `sexo`, `direccion`, `correo`, `nacionalidad`,
            `fecha`, `estado`, `transporte`, `otros`) 
           VALUES ('$iduser','$n','$a','$sx','$d','$co','$na','$fe','$es','$tr','$o');";
-          $result= mysql_query($query, $this->conexion);          
+          $result= mysqli_query($this->conexion,$query);          
 
           if($result){
 
@@ -835,7 +834,7 @@ class Model {
 
               $idti=$this->getIdTitulo($valor);              
               $query="INSERT INTO col_alum_ciclo VALUES('$iduser','$idti');";
-              $result= mysql_query($query, $this->conexion);
+              $result= mysqli_query($this->conexion,$query);
             }
 
             if($result){
@@ -847,7 +846,7 @@ class Model {
                   $fecha=$ft[$i];
                   $query="INSERT INTO `col_alum_idiomas`( `iduser`, `nombre`, `fecha`, `nivel_hablado`, `nivel_escrito`) 
                   VALUES ($iduser,'$idioma','$fecha','$hablado','$escrito');";
-                  $result= mysql_query($query, $this->conexion);
+                  $result= mysqli_query($this->conexion,$query);
                   //var_dump($result);
                 }
 
@@ -858,7 +857,7 @@ class Model {
                     $ffi=$ff[$i];
                     $query="INSERT INTO `col_alum_experiencia`(`iduser`, `finicio`, `ffinal`, `descripcion`) 
                     VALUES ($iduser,'$fini','$ffi','$descripcion')";
-                    $result= mysql_query($query, $this->conexion);
+                    $result= mysqli_query($this->conexion,$query);
                     var_dump($result);
                   }
                 }
@@ -872,9 +871,9 @@ class Model {
 
       $query="SELECT idciclo FROM col_ciclos where abreviatura='$nombre'";
 
-       $result = mysql_query($query, $this->conexion);
+       $result = mysqli_query($this->conexion,$query);
 
-       $row = mysql_fetch_assoc($result)['idciclo'];        
+       $row = mysqli_fetch_assoc($result)['idciclo'];        
 
        return $row;
 
@@ -883,10 +882,10 @@ class Model {
       public function dameProfesores(){
         $sql = "select * from col_profesores order by nombre asc";
 
-        $result = mysql_query($sql, $this->conexion);
+        $result = mysqli_query($this->conexion,$sql);
 
         $profesores = array();
-        while ($row = mysql_fetch_assoc($result)){
+        while ($row = mysqli_fetch_assoc($result)){
           $profesores[] = $row;
         }
         return $profesores;
@@ -895,7 +894,7 @@ class Model {
       public function borrarPerfil($id){
 
         $query="DELETE FROM `colowork`.`col_usuarios` WHERE `col_usuarios`.`iduser` = $id";
-        $result= mysql_query($query, $this->conexion);
+        $result= mysqli_query($this->conexion,$query);
 
       return $result;
       }
@@ -909,13 +908,13 @@ class Model {
         $r=htmlspecialchars($r);        
 
         $query="INSERT INTO `col_usuarios`(`user`, `pass`, `rol`) VALUES ('$u','$p','$r')";
-        $result= mysql_query($query, $this->conexion);
+        $result= mysqli_query($this->conexion,$query);
 
         $iduser= $this->getIdUser($u); 
 
         $query="INSERT INTO `col_profesores`(`iduser`, `nombre`, `apellidos`, `correo`, `ocupacion`) VALUES ('$iduser','$n','$ap','$c','$o')";          
         
-        $result= mysql_query($query, $this->conexion);
+        $result= mysqli_query($this->conexion,$query);
        
 
         return $result;
@@ -932,14 +931,14 @@ class Model {
         $competencias=explode(".", $c);
 
         $query="INSERT INTO `col_ciclos`(`nombre`, `abreviatura`, `descripcion`) VALUES ('$n','$ab','$d')";
-        $result= mysql_query($query, $this->conexion);
+        $result= mysqli_query($this->conexion,$query);
         if($result){
           $query="SELECT idciclo FROM col_ciclos WHERE nombre='$n'";
-          $result= mysql_query($query, $this->conexion);
-          $id = mysql_fetch_assoc($result)['idciclo'];
+          $result= mysqli_query($this->conexion,$query);
+          $id = mysqli_fetch_assoc($result)['idciclo'];
           for($i=0;$i<count($competencias);$i++){
              $query="INSERT INTO `col_competencias`(`nombre`, `idciclo`) VALUES ('$competencias[$i]','$id')";
-             $result= mysql_query($query, $this->conexion);
+             $result= mysqli_query($this->conexion,$query);
           }
         }
         return $result;
@@ -951,10 +950,10 @@ class Model {
                   join col_competencias on col_ciclos.idciclo=col_competencias.idciclo 
                     WHERE col_ciclos.abreviatura='".$ciclo."' 
                       order by col_ciclos.nombre asc;";
-      $result = mysql_query($query, $this->conexion);
+      $result = mysqli_query($this->conexion,$query);
       $competencias=array();
 
-      while ($row = mysql_fetch_assoc($result)){
+      while ($row = mysqli_fetch_assoc($result)){
         $competencias[]=$row['competencia'];
         
       }
@@ -964,10 +963,10 @@ class Model {
     public function todasCompetencias(){
 
       $query="select nombre as competencia, idcompetencia from col_competencias";
-      $result = mysql_query($query, $this->conexion);
+      $result = mysqli_query($this->conexion,$query);
       $competencias=array();
 
-      while ($row = mysql_fetch_assoc($result)){
+      while ($row = mysqli_fetch_assoc($result)){
         $competencias[]=$row;
         
       }
@@ -979,11 +978,11 @@ class Model {
 
       $sql = "select * from col_ciclos order by nombre asc";
 
-      $result = mysql_query($sql, $this->conexion);
+      $result = mysqli_query($this->conexion,$sql);
 
       $ciclos = array();
       $i=0;
-      while ($row = mysql_fetch_assoc($result)){
+      while ($row = mysqli_fetch_assoc($result)){
         $ciclos[] = $row;
         $ciclos[$i]['competencias']=$this->dameCompetencias($ciclos[$i]['abreviatura']);
         $i++;
@@ -994,11 +993,11 @@ class Model {
 
       $sql = "select * from col_ciclos where idciclo=$id";
 
-      $result = mysql_query($sql, $this->conexion);
+      $result = mysqli_query($this->conexion,$sql);
 
       if($result){
      
-        $ciclo = mysql_fetch_assoc($result);
+        $ciclo = mysqli_fetch_assoc($result);
 
         if(!empty($ciclo)){
         
@@ -1013,15 +1012,15 @@ class Model {
 
       if($id=="0"){
         $query="SELECT * FROM col_ofertas WHERE cod_act='$cod_act'";
-        $result=mysql_query($query);
-        $oferta=mysql_fetch_assoc($result);
+        $result=mysqli_query($this->conexion,$query);
+        $oferta=mysqli_fetch_assoc($result);
 
         return $oferta;
       }else{
         
         $query="SELECT * FROM col_ofertas WHERE idoferta='$id'";
-        $result=mysql_query($query);
-        $oferta=mysql_fetch_assoc($result);
+        $result=mysqli_query($this->conexion,$query);
+        $oferta=mysqli_fetch_assoc($result);
 
         return $oferta;
       }
@@ -1031,9 +1030,9 @@ class Model {
     public function alumnosCumpleCompe($id){
 
       $query="SELECT * FROM col_oferta_competencia WHERE idoferta='$id'";
-      $result = mysql_query($query, $this->conexion);    
+      $result = mysqli_query($this->conexion,$query);    
 
-      while ($row = mysql_fetch_assoc($result)['idcompetencia']){
+      while ($row = mysqli_fetch_assoc($result)['idcompetencia']){
         $competencias[]=$row;
       }    
      
@@ -1049,10 +1048,10 @@ class Model {
       $query=$query." OR col_competencias.idcompetencia='".$competencias[$i]."'";
      }
      $query=$query." GROUP BY col_alumnos.iduser;";
-     $result = mysql_query($query, $this->conexion);
+     $result = mysqli_query($this->conexion,$query);
      $alumnos=array();
      
-      while ($row = mysql_fetch_assoc($result)){
+      while ($row = mysqli_fetch_assoc($result)){
       
       if($row['cantidad']==$cant){
         $alumnos[]=$row;
