@@ -45,32 +45,7 @@ class Model {
     return $row;
   }
 
-  public function dameAlumnos(){
-      $sql = "select col_alumnos.fecha,col_alumnos.iduser,col_usuarios.url, col_alumnos.nombre, col_alumnos.apellidos,col_alumnos.direccion,col_alumnos.estado,col_alumnos.transporte from col_alumnos join col_usuarios on col_alumnos.iduser=col_usuarios.iduser order by nombre asc";
-
-      $result = mysqli_query($this->conexion,$sql);
-
-      if($result){
-
-        $alumnos = array();
-
-        while ($row = mysqli_fetch_assoc($result)){
-          $iduser=$row['iduser'];
-          $sql2 = "select col_ciclos.nombre from col_ciclos join col_alum_ciclo on col_alum_ciclo.idciclo=col_ciclos.idciclo where iduser=$iduser";
-          $result2 = mysqli_query($this->conexion,$sql2);
-          $ciclos=array();
-          if($result2){
-            while ($row2 = mysqli_fetch_assoc($result2)){
-              $ciclos[]=$row2['nombre'];          
-            }
-            //$titulos=implode('<br>', $ciclos);
-            $row['titulos']=$ciclos;
-            $alumnos[] = $row;
-          }
-        }
-      return $alumnos;
-    }
-  }
+  
 
   public function dameEmpresas(){
       $sql = "SELECT col_empresas.iduser,col_empresas.nombre, col_empresas.actividad, col_empresas.idfiscal, col_empresas.razon, col_empresas.direccion, col_empresas.poblacion ,col_empresas.pais, col_empresas.provincia, col_empresas.codpostal, col_empresas.telefono, col_empresas.fax, col_empresas.ofertas,col_empresas.correo FROM col_empresas";
@@ -196,9 +171,39 @@ class Model {
         
         return $row;
     }
+    public function dameAlumnos(){
+      $sql = "select col_alumnos.fecha,col_alumnos.iduser,col_usuarios.url, col_alumnos.nombre, col_alumnos.apellidos,col_alumnos.direccion,col_alumnos.estado,col_alumnos.transporte from col_alumnos join col_usuarios on col_alumnos.iduser=col_usuarios.iduser order by nombre asc";
+
+      $result = mysqli_query($this->conexion,$sql);
+
+      if($result){
+
+        $alumnos = array();
+
+        while ($row = mysqli_fetch_assoc($result)){
+          $iduser=$row['iduser'];
+          $sql2 = "select col_ciclos.nombre from col_ciclos join col_alum_ciclo on col_alum_ciclo.idciclo=col_ciclos.idciclo where iduser=$iduser";
+          $result2 = mysqli_query($this->conexion,$sql2);
+          $ciclos=array();
+          if($result2){
+            while ($row2 = mysqli_fetch_assoc($result2)){
+              $ciclos[]=$row2['nombre'];          
+            }
+            //$titulos=implode('<br>', $ciclos);
+            $row['titulos']=$ciclos;
+            $alumnos[] = $row;
+          }
+        }
+      return $alumnos;
+    }
+  }
      public function dameAlumno($id){
 
-       $query="SELECT col_alumnos.iduser,col_alumnos.nombre,col_alumnos.apellidos,col_alumnos.sexo,col_alumnos.direccion,col_alumnos.correo,col_alumnos.nacionalidad,col_alumnos.fecha,col_alumnos.estado,col_alumnos.transporte,col_alumnos.otros,col_usuarios.url FROM col_alumnos JOIN col_usuarios on col_alumnos.iduser=col_usuarios.iduser where col_alumnos.iduser=$id";
+       $query="SELECT col_alumnos.iduser,col_alumnos.nombre,col_alumnos.apellidos,col_alumnos.sexo,
+       col_alumnos.direccion,col_alumnos.correo,col_alumnos.nacionalidad,col_alumnos.fecha,
+       col_alumnos.estado,col_alumnos.transporte,col_alumnos.otros,col_usuarios.url 
+       FROM col_alumnos JOIN col_usuarios on col_alumnos.iduser=col_usuarios.iduser 
+       where col_alumnos.iduser=$id";
 
        $result = mysqli_query($this->conexion,$query);
 
@@ -207,8 +212,7 @@ class Model {
        $array=$this->dameTitulosAlu($id);
        $idiomas=$this->dameIdiomasAlu($id);
        $experiencia=$this->dameexperienciaAlu($id);
-       $titulos=implode("<br>", $array);
-       $row['titulos']=$titulos;
+       $row['titulos']=$array;
        $row['idiomas']=$idiomas;
        $row['experiencia']=$experiencia;
        return $row;
@@ -515,7 +519,8 @@ class Model {
       }
       public function buscarOfertas($buscar){
 
-       $query="SELECT idoferta, `titulo`,`descripcion`,`zona`,`contrato`,`jornada`,`salario`,col_empresas.iduser , col_empresas.nombre 
+       $query="SELECT idoferta, `titulo`,`descripcion`,`zona`,`contrato`,`jornada`,
+       `salario`,col_empresas.iduser , col_empresas.nombre 
                 FROM `col_ofertas` JOIN col_empresas on col_ofertas.iduser=col_empresas.iduser WHERE 
               `titulo` LIKE '%".$buscar."%' 
             OR `descripcion` LIKE '%".$buscar."%' 
@@ -557,6 +562,7 @@ class Model {
            OR `ocupacion` LIKE '%".$buscar."%'";
 
        $result = mysqli_query($this->conexion,$query);
+       
 
        $profesores = array();
          while ($row = mysqli_fetch_assoc($result))
@@ -579,8 +585,6 @@ class Model {
            OR `fecha` LIKE '%".$buscar."%' 
            OR `estado` LIKE '%".$buscar."%' 
            OR `transporte` LIKE '%".$buscar."%' 
-           OR `experiencia` LIKE '%".$buscar."%' 
-           OR `idiomas` LIKE '%".$buscar."%' 
            OR `otros` LIKE '%".$buscar."%'";
 
        $result = mysqli_query($this->conexion,$query);
@@ -598,8 +602,7 @@ class Model {
             while ($row2 = mysqli_fetch_assoc($result2)){
               $ciclos[]=$row2['nombre'];          
             }
-            $titulos=implode('<br>', $ciclos);
-            $row['titulos']=$titulos;
+            $row['titulos']=$ciclos;
             $alumnos[] = $row;
           }
         }
@@ -723,6 +726,7 @@ class Model {
         // Primero, hay que validar que se trata de un JPG/GIF/PNG
         $allowedExts = array("jpg", "jpeg", "gif", "png", "JPG", "GIF", "PNG");
         $extension = end(explode(".", $_FILES["foto"]["name"]));
+        var_dump($extension);
         if ((($_FILES["foto"]["type"] == "image/gif")
                 || ($_FILES["foto"]["type"] == "image/jpeg")
                 || ($_FILES["foto"]["type"] == "image/png")
@@ -740,7 +744,7 @@ class Model {
             //$this->resizeImagen($directorio.'/', $foto, 500, 500,$resFoto,$extension);
             unlink($directorio.'/'.$foto);
 
-            $path='/colowork/web/img/users/'.$minFoto;
+            $path='web/img/users/'.$minFoto;
             return $path;
             
         } else { // El archivo no es JPG/GIF/PNG
@@ -1063,7 +1067,7 @@ class Model {
 
     public function dameURL(){
       //$="http://".$_SERVER['HTTP_HOST'].":".$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'];
-      $url="http://".$_SERVER['HTTP_HOST']."/ColoWork/";
+      $url="http://".$_SERVER['HTTP_HOST']."/Colowork/";
       return $url;
     }
 

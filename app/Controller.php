@@ -458,18 +458,7 @@ class Controller{
      }
 
      
-     public function verProfesores(){
 
-        $m = new Model(Config::$pro_bd_nombre, Config::$pro_bd_usuario,
-                     Config::$pro_bd_clave, Config::$pro_bd_hostname);
-
-        $params = array(
-             'profesores' => $m->dameProfesores()
-         );
-
-         require __DIR__ . '/templates/verProfesores.php';
-
-     }
      public function verPerfil(){
         if (!isset($_SESSION['rol'])) {
              throw new Exception('No estas conectado.Por Favor Logeate.');
@@ -635,9 +624,9 @@ class Controller{
                     if($_FILES['foto']['name'] != ""){
                         $url_foto=$m->comprobarFoto();
                     }elseif($_POST['sexo']=="Hombre"){
-                        $url_foto="/colowork/web/img/users/default_male.jpg";
+                        $url_foto="web/img/users/default_male.jpg";
                     }elseif($_POST['sexo']=="Mujer"){
-                        $url_foto="/colowork/web/img/users/rsz_default_female.jpg";
+                        $url_foto="web/img/users/rsz_default_female.jpg";
                     }
                         if($url_foto!=false){
                         $m->insertarAlumno(
@@ -695,6 +684,31 @@ class Controller{
      }
      require __DIR__ . '/templates/altaAlumno.php';
  }
+ public function verProfesores(){
+
+        $m = new Model(Config::$pro_bd_nombre, Config::$pro_bd_usuario,
+                     Config::$pro_bd_clave, Config::$pro_bd_hostname);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $buscar=$_POST['buscar'];
+            $profes=$m->buscarProfesores($buscar);
+            $params = array(
+             'profesores' => $profes
+            );
+            if(empty($profes)){
+                $params['mensaje']="Esa busqueda no arrojo ningun resultado";
+            }
+        }else{
+
+        $params = array(
+             'profesores' => $m->dameProfesores()
+         );
+        }
+
+         require __DIR__ . '/templates/verProfesores.php';
+
+     }
 
      public function verAlumnos(){
 
@@ -799,9 +813,9 @@ class Controller{
 
             $m = new Model(Config::$pro_bd_nombre, Config::$pro_bd_usuario,
                          Config::$pro_bd_clave, Config::$pro_bd_hostname);
-             var_dump($_SESSION['id']);
+            
             $result=$m->borrarPerfil($_SESSION['id']);
-            var_dump($_SESSION);
+            
 
             if(!$result){
 

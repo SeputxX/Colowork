@@ -39,7 +39,7 @@ function doPDF($path='',$content='',$body=false,$style='',$mode=false,$paper_1='
         $path!='' ? $path .='.pdf' : $path = crearNombre(10);  
             
         $content = ob_get_clean(); 
-        require_once('/../../web/libs/html2pdf/vendor/autoload.php'); 
+        require_once('../../web/libs/html2pdf/vendor/autoload.php'); 
         
         //Orientación / formato del pdf y el idioma.
         $pdf = new HTML2PDF($paper_1,$paper_2,'es'/*, array(10, 10, 10, 10) /*márgenes*/); //los márgenes también pueden definirse en <page> ver documentación
@@ -81,6 +81,9 @@ $m = new Model(Config::$pro_bd_nombre, Config::$pro_bd_usuario,
 //Aquí pondriamos por ejemplo la consulta
 $id=$_GET['id'];
 $alumno=$m->dameAlumno($id);
+$url=$m->dameUrl();
+
+
 $html="
 <div class='ficha'>
       <h1>CURRICULUM VITAE</h1>
@@ -88,7 +91,7 @@ $html="
             <tr>
                   <th class='sepa' ><b>Formato europeo <br> para el <br> Curriculum <br></b><img class='bandera' src='../../web/img/bandera-europa.png'></th>
                   <td class='datos'>
-                  <img src='http://localhost".$alumno['url']."'></td>
+                  <img src='".$url.$alumno['url']."'></td>
             </tr>
              <tr>
                   <th class='sepa'>Datos</th>
@@ -129,7 +132,7 @@ $html="
             
             $html.= "<tr>
                         <td class='sepa'> ".$idioma['nombre']."</td>
-                        <td class='datos'>Nivel Hablad: ".$idioma['nivel_hablado']." Nivel Escrito: ".$idioma['nivel_escrito']."Fecha Titulacion: ".$idioma['fecha']."</td>
+                        <td class='datos'>Nivel Hablado: ".$idioma['nivel_hablado']." Nivel Escrito: ".$idioma['nivel_escrito']." Fecha Titulacion: ".$idioma['fecha']."</td>
                     </tr>";
             }
             $html .="<tr>

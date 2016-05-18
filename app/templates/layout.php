@@ -69,7 +69,7 @@
                  <?php if($_SESSION['rol']=="centro" || $_SESSION['rol']=="admin"){ ?>
 
                  <li><a href="index.php?ctl=altaCiclo">Alta Ciclo Formativo</a></li>
-                 <li><a href="index.php?ctl=altaActividad">Alta Actividad</a></li>
+              
 
                  <?php } ?>
 

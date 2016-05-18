@@ -206,7 +206,7 @@ function alumnosAptos(pos,idcom){
 		http_request = new XMLHttpRequest();
 		http_request.overrideMimeType('text/xml');
 		url=getCookie("url");
-		http_request.open('GET', 'http://localhost/colowork/web/index.php?ctl=aptos&url='+url, true);
+		http_request.open('GET', 'index.php?ctl=aptos&url='+url, true);
 		http_request.send();
 
 		http_request.onreadystatechange = function(){

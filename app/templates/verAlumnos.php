@@ -11,19 +11,10 @@
 	</form>
 </div>
 <div class="alumnos" >
-	
 				<?php foreach ($params['alumnos'] as $alumno) :?>
-					<table class="alumno">
-					<tr>
-						<td><div class="imgD"><img class="imgP"  src="<?php echo $alumno['url'] ?>" class="perfil"></div></td>
-						<th>
-						
-						<b>Nombre: </b><?php echo $alumno['nombre']?><br>Apellidos: <?php echo $alumno['apellidos']?><br>
-								
-						</th>
-					</tr>	
-					<tr>
-						<td colspan="2">
+					<div class="alumno">											
+						<div class="info1">
+							<b>Nombre: </b><?php echo $alumno['nombre']?><br><b>Apellidos:</b> <?php echo $alumno['apellidos']?><br>
 							<b>Direccion: </b><?php echo $alumno['direccion']?><br>
 							<b>Fecha Nacimiento: </b><?php echo $alumno['fecha']?><br>
 							<b>Estado: </b><?php echo $alumno['estado']?><br>
@@ -33,11 +24,12 @@
 							<?php foreach ($alumno['titulos'] as $titulo) : ?>
 							<li><?php echo $titulo ?>.</li>
 							<?php endforeach; ?>
-							</ul>
-							<a href="index.php?ctl=verAlumno&id=<?php echo $alumno['iduser'] ?>">Ver Perfil</a>
-						</td>
-					</tr>						
-					</table>
+							</ul>							
+						</div>
+						<div class="controles">
+								<a href="index.php?ctl=verAlumno&id=<?php echo $alumno['iduser'] ?>">Ver Perfil</a>
+						</div>
+					</div>
 				<?php endforeach; ?>
 </div>
 <?php $contenido = ob_get_clean() ?>

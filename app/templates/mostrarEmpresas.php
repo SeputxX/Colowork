@@ -3,7 +3,6 @@
 <?php if(isset($params['mensaje'])) :?>
     <b><span style="color: red;"><?php echo $params['mensaje'] ?></span></b>
 <?php endif; ?>
- 
      <?php foreach ($params['empresas'] as $empresa) :?>
         <div class="empresa">
         <div class="imgEmpresa">

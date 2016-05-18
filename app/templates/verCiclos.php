@@ -9,14 +9,14 @@
 	</form>
 </div>
 <?php foreach ($params['ciclos'] as $ciclo) :?>
-	<table name="ciclo">
-		<tr>
-			<td><a href="index.php?ctl=verCiclo&id='<?php echo $ciclo['idciclo'] ?>'"><b><?php echo $ciclo['abreviatura'] ?></b></a></td>
-		</tr>
-		<tr>
-			<td><?php echo $ciclo['nombre'] ?></td>
-		</tr>
-	</table>
+	<div class="ciclo">
+		<span class="center">
+			<a href="index.php?ctl=verCiclo&id=<?php echo $ciclo['idciclo'] ?>">
+				<b><?php echo $ciclo['abreviatura'] ?></b>
+			</a><br>
+			<?php echo $ciclo['nombre'] ?>
+		</span>
+	</div>
 
 
 <?php endforeach; ?>

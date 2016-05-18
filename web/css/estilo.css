@@ -23,6 +23,12 @@
 .oferta{
   margin-bottom: 10px;
 }
+.intro{
+  width: 70%;
+  overflow: hidden;
+  margin: 0 auto;
+  text-align: justify;
+}
 .endOfe{
   background-color: white;  
   border-radius: 10px 10px 10px 10px;
@@ -68,13 +74,38 @@ h1{
   text-align: center;
 }
 .imgD{
-  background-color: white;
-  height: 92px;
-  width: 70px;
+  height: 96px;
+  width: 74px;
   display: inline-block;
   float: left;
+  margin-right: 10px;
+   border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  background-color: #e7e7e7;
+}
+.orga{
+  float:left;
+  overflow: hidden;
+}
+.imgDF{
+  height: 96px;
+  width: 74px;
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+   border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  background-color: #e7e7e7
 }
 .imgP{
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 0px solid #2c2f42;
   
 }
 .fichaal, .perfil{
@@ -112,10 +143,10 @@ textarea{
  margin-top: 0px !important;
 }
 .aptos{
-  border-radius: 125px 125px 125px 125px;
--moz-border-radius: 125px 125px 125px 125px;
--webkit-border-radius: 125px 125px 125px 125px;
-border: 0.1px solid purple;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
 background-color: #f8f8f8;
 width: 120px;
 
@@ -183,27 +214,182 @@ max-width: 500px;
 }
 
 
-.alumnos, .profesores{
-overflow: hidden;
-width:96%; 
-margin:0 auto;
+.alumnos{
+  overflow: hidden;
+  width:84%; 
+  margin:0 auto;
 }
+.profesores{
+  overflow: hidden;
+  width:95%; 
+  margin:0 auto;
+}
+.info1{
+  margin-left: 5px;
+  min-height: 230px;
+}
+.info2{
+  margin-left: 5px;
+  min-height: 100px;
+}
+.info3{
+  margin-left: 5px;
+  height: 200px;
+}
+
+.controles{
+  position: relative;
+  bottom: 0px;
+}
+
+.campo1{
+width: 40%;
+float: left;
+}
+.campo2{
+  width:60%;
+  float: left;
+}
+
+.fieldset1{
+
+  overflow: hidden;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  }
+  .fieldset2{
+    margin-bottom: 10px;
+  float: right;
+  overflow: hidden;
+  width: 100%;
+  background-color: white;
+      margin-left: 2px;
+      margin-right: 2px;
+      padding-top: 0.35em;
+      padding-bottom: 0.625em;
+      padding-left: 0.75em;
+      padding-right: 0.75em;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  }
 
 .alumno{
   margin: 10px;
   width: 300px !important;
-  height: 280px;
+  min-height: 280px;
   float: left;
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  padding: 10px;
 }
+.alumno2{
+  margin: 10px;
+  width: 300px !important;
+  min-height: 200px;
+  float: left;
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  padding: 10px;
+}
+.compe{
+  width: 69%;
+  float: left;
+  margin: 0 auto;
+   background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  padding: 10px;
+
+}
+.aviso{
+text-align: center;
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  padding: 10px;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+   margin-top: 20px;
+}
+.desc{
+  text-align: center;
+  width: 30%;
+  float: left;
+  margin: 0 auto;
+   margin-right: 10px;
+   background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  padding: 10px;
+  margin-bottom:10px;
+
+}
+.texto{
+  width:80%;
+  margin: 0 auto;
+   background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  padding: 10px;
+  margin-bottom:10px;
+}
+
 .profesor{
   text-align: left;
   margin: 10px;
-  width: 340px !important;
   float: left;
+  width: 340px !important;
+  min-height: 120px;
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  padding: 10px;
 }
-.profesor th{
-  padding-right: 5px;
-  width: 75px;
+.ciclo{
+  text-align: center;
+  margin: 10px;
+  float: left;
+  max-width: 250px;
+  min-height: 120px;
+  background-color: white;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 2px solid #2c2f42;
+  padding: 10px;
+  vertical-align: middle !important;
+  display: table;
+
+}
+.center{
+  display: table-cell;
+  vertical-align: middle;
+
 }
 .divider{
  list-style: none;
