@@ -7,16 +7,16 @@
 
 <table>
 	<tr>
-		<th>Titulo</th>
+		<b>Titulo</b>
 		<td><input type="text" name="titulo"  value="<?php echo $params['titulo'] ?>" pattern="([a-zA-Z]|\s){2,50}" required/>(Solo letras. Max 50)</td>
 	</tr>
 	<tr>
-		<th>Desripcion</th>
+		<b>Desripcion</b>
 		<td><textarea name="descripcion" pattern="([a-zA-Z]|\s){2,50}" required><?php echo $params['descripcion'] ?></textarea>(Solo letras. Max 250)</td>
 	</tr>
 
 	<tr>
-		<th>Contrato</th>
+		<b>Contrato</b>
 		<td>
 			<select class="actividad" name="contrato" required>
 	            <option value="Indefinido" <?php if(isset($_POST['contrato'])){ if($_POST['contrato']=='Indefinido'){ echo "selected";}}?>>Indefinido</option>
@@ -27,7 +27,7 @@
 		</td>
 	</tr>
 	<tr>
-		<th>Jornada</th>
+		<b>Jornada</b>
 		<td>
 			<select class="actividad" name="jornada" required>			
 	            <option value="Tiempo Completo"<?php if(isset($_POST['jornada'])){ if($_POST['jornada']=='Tiempo Completo') echo "selected";} ?>>Tiempo Completo</option>
@@ -37,7 +37,7 @@
 		</td>
 	</tr>
 	<tr>
-		<th>Salario</th>
+		<b>Salario</b>
 		<td>
 			<select class="actividad" name="salario" required>
 	            <option value="No Especificado" <?php if(isset($_POST['salario'])){ if($_POST['salario']=='No Especificado') echo "selected";} ?>>No Especificad</option>
@@ -49,10 +49,10 @@
 		</td>
 	</tr>
 	<tr>
-		<th>
+		<b>
 				Competencias exigidas
 				<div class="aptos">Alumnos<br>Aptos: <br><b id="alumnos">todos</b></div>
-		</th>
+		</b>
 		<td >
 		<a id="desple" onclick="desplegarCompe()">Desplegar competencias</a>
 		<div id="competencias" style="display: none">
@@ -77,7 +77,7 @@
 		</td>
 	</tr>
 	<tr>
-		<th>Zona</th>
+		<b>Zona</b>
 		<td>
 			<select name="zona">
 				<option value="San Antonio Abad" <?php if(isset($_POST['zona'])){ if("San Antonio Abad"==$_POST['zona']) echo "selected";} ?>>San Antonio Abad</option>

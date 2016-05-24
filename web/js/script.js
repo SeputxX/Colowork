@@ -128,6 +128,16 @@ function jugar(){
 
 			
 	}
+	function select(){
+		var pais = document.getElementById('pais');
+		var provincia = document.getElementById('provincia');
+		
+		if(pais.value=="España"){
+			provincia.setAttribute("style","display:inline");
+		}else{
+			provincia.setAttribute("style","display:none");
+		}
+	}
 
 function avisarBorrado(){
 	var flag = confirm("¿Esta seguro de que desea borrar su perfil en ColoWork?")

@@ -3,11 +3,11 @@
 <b><span style="color: red;"><?php echo $params['mensaje']?></span></b>
 <?php endif; ?>
 <?php if(!empty($params['resultados']['alumnos'])){ ?>
-<h2 class="aviso">Alumnos</h2>
+<h2 class="titOfe">Alumnos</h2>
 <div class="container">	
 	<?php foreach ($params['resultados']['alumnos'] as $alumno) :?>
-			<div class="alumno2">                     
-            <div class="info3">
+			<div class="alumno">                     
+            <div class="info1">
               <b>Nombre: </b><?php echo $alumno['nombre']?><br><b>Apellidos:</b> <?php echo $alumno['apellidos']?><br>
               <b>Direccion: </b><?php echo $alumno['direccion']?><br>
               <b>Fecha Nacimiento: </b><?php echo $alumno['fecha']?><br>
@@ -28,7 +28,7 @@
 </div>
 <?php } ?>
 <?php if(!empty($params['resultados']['profesores'])){ ?>
-<h2 class="aviso">Profesores</h2>
+<h2 class="titOfe">Profesores</h2>
 <div class="container">
   <?php foreach ($params['resultados']['profesores'] as $profe) :?>
     <div class="profesor">
@@ -44,7 +44,7 @@
 </div>
 <?php } ?>
 <?php if(!empty($params['resultados']['empresas'])){ ?>
-<h2 class="aviso">Empresas</h2>
+<h2 class="titOfe">Empresas</h2>
   <div class="empresas">
   <?php foreach ($params['resultados']['empresas'] as $empresa) :?>
     <div class="empresa">
@@ -64,14 +64,14 @@
 
 <?php } ?>
 <?php if(!empty($params['resultados']['ofertas'])){ ?>
-<h2 class="aviso">Ofertas</h2>
+<h2 class="titOfe">Ofertas</h2>
 <div class="ofertas">
   
   <?php foreach ($params['resultados']['ofertas'] as $oferta) :?>
   <div class="oferta">
-            <div class="titOfe">
+            <h3 class="titOfe">
               Oferta de<a href="index.php?ctl=verEmpresa&id=<?php echo $oferta['iduser'] ?>"> <?php echo $oferta['nombre'] ?></a>
-            </div>
+            </h3>
             <div class="endOfe">
                 <h3><?php echo $oferta['titulo'] ?></h3>
                 <b><?php echo $oferta['zona'] ?></b>

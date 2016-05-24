@@ -14,9 +14,9 @@
 		
 				<?php foreach ($params['ofertas'] as $oferta) :?>
 					<div class="oferta">
-						<div class="titOfe">
+						<h1 class="titOfe">
 							Oferta de<a href="index.php?ctl=verEmpresa&id=<?php echo $oferta['iduser'] ?>"> <?php echo $oferta['nombre'] ?></a>
-						</div>
+						</h1>
 						<div class="endOfe">
 								<h3><?php echo $oferta['titulo'] ?></h3>
 								<b><?php echo $oferta['zona'] ?></b>

@@ -122,8 +122,13 @@ $html="
                   <td class='datos'>".$alumno['fecha']."</td>
             </tr>
              <tr>
-                  <td class='sepa' >Títulos</td>
-                  <td class='datos'>".$alumno['titulos']."</td>
+                  <th class='sepa' >Títulos</th>
+                  <td class='datos'>";
+                  foreach ($alumno['titulos'] as $titulo) {
+                    $text.=$titulo."<br>";
+                  }
+
+                  $html.=$text."</td>
             </tr>
             <tr>
                   <td class='sepa' ><b>Idiomas</b></td>

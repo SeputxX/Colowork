@@ -44,6 +44,7 @@ if(isset($_SESSION['user'])){
              'borrarPerfil' => array ('controller' =>'Controller', 'action'=>'borrarPerfil'),
              'conLeg' => array ('controller' =>'Controller', 'action'=>'conLeg'),
              'notfound' => array ('controller' =>'Controller', 'action'=>'notfound'),
+             'infoCookie' => array ('controller' =>'Controller', 'action'=>'infoCookie'),
          );
  
     }elseif($_SESSION['rol']=='alumno'){
@@ -67,9 +68,11 @@ if(isset($_SESSION['user'])){
              'borrarPerfil' => array ('controller' =>'Controller', 'action'=>'borrarPerfil'),
              'conLeg' => array ('controller' =>'Controller', 'action'=>'conLeg'),
              'notfound' => array ('controller' =>'Controller', 'action'=>'notfound'),
+             'infoCookie' => array ('controller' =>'Controller', 'action'=>'infoCookie'),
          );
 
     }elseif($_SESSION['rol']=='empresa'){
+        echo "hola";
          $map = array(
              'inicio' => array('controller' =>'Controller', 'action' =>'inicio'),
              'logout' => array('controller' =>'Controller', 'action' =>'logout'),
@@ -91,6 +94,7 @@ if(isset($_SESSION['user'])){
              'borrarPerfil' => array ('controller' =>'Controller', 'action'=>'borrarPerfil'),
              'conLeg' => array ('controller' =>'Controller', 'action'=>'conLeg'),
              'notfound' => array ('controller' =>'Controller', 'action'=>'notfound'),
+             'infoCookie' => array ('controller' =>'Controller', 'action'=>'infoCookie'),
          );
     }elseif($_SESSION['rol']=='centro'){
          $map = array(
@@ -114,6 +118,7 @@ if(isset($_SESSION['user'])){
              'borrarPerfil' => array ('controller' =>'Controller', 'action'=>'borrarPerfil'),
              'conLeg' => array ('controller' =>'Controller', 'action'=>'conLeg'),
              'notfound' => array ('controller' =>'Controller', 'action'=>'notfound'),
+             'infoCookie' => array ('controller' =>'Controller', 'action'=>'infoCookie'),
          );
 
     }
@@ -133,20 +138,26 @@ if(isset($_SESSION['user'])){
      'verPerfil' => array('controller' =>'Controller', 'action' =>'verPerfil'),
      'verEmpresa' => array('controller' =>'Controller', 'action' =>'verEmpresa'),
      'logout' => array('controller' =>'Controller', 'action' =>'logout'),
+     'infoCookie' => array ('controller' =>'Controller', 'action'=>'infoCookie'),
  );
 
 }
+//var_dump($map);
+
 
  // Parseo de la ruta
  if (isset($_GET['ctl'])) {
+    //var_dump($_GET['ctl']);
+   // var_dump($map[$_GET['ctl']]);
+    //var_dump($_SESSION);
      if (isset($map[$_GET['ctl']])) {
          $ruta = $_GET['ctl'];
-     } else {    
-         header('Location: index.php?ctl=notfound');
+     } else {
+        header('Location: index.php?ctl=notfound');
          exit;
      }
  } else {
-     $ruta = 'inicio';
+    $ruta = 'inicio';
  }
 
  $controlador = $map[$ruta];

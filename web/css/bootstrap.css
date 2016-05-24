@@ -1097,8 +1097,9 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: red !important;
   text-decoration: none;
+  text-transform: capitalize;
 }
 a:hover,
 a:focus {
@@ -4548,7 +4549,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
   color: #555;
-  background-color: #e7e7e7;
+  background-color:#1A237E !important;
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {

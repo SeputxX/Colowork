@@ -1067,7 +1067,7 @@ class Model {
 
     public function dameURL(){
       //$="http://".$_SERVER['HTTP_HOST'].":".$_SERVER['SERVER_PORT'].$_SERVER['REQUEST_URI'];
-      $url="http://".$_SERVER['HTTP_HOST']."/Colowork/";
+      $url="http://".$_SERVER['HTTP_HOST']."/ColoworkHosting/ColoWork/";
       return $url;
     }
 

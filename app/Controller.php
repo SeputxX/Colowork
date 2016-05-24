@@ -26,7 +26,9 @@ class Controller{
      }
      public function modificarPerfil(){
 
-        if(isset($_SESSION['iduser'])){
+        echo "<script>alert(hola)</script>";
+
+        if(isset($_SESSION['id'])){
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -248,7 +250,7 @@ class Controller{
                 }else{ $mensaje = "No estas conectado";}
             }
 
-        }else{header("Location: index.php?ctl=login");}
+        }
 
      }
  
@@ -1028,6 +1030,11 @@ class Controller{
             'tablero_aux'=>$m->tablero_aux(),
             );
         require __DIR__ . '/templates/juegodelavida.php';
+    }
+    public function infoCookie(){
+
+        require __DIR__ . '/templates/infoCookie.php';
+
     }
 
 

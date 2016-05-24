@@ -125,7 +125,7 @@
                 <div class="collapse navbar-collapse " id="footer">
                   <ul class="nav navbar-nav">
                     <li><a href="index.php?ctl=conLeg">Aviso Legal</a></li>
-                    <li><a href="index.php?ctl=cookies">Politica de Cookies</a></li>
+                    <li><a href="index.php?ctl=infoCookie">Politica de Cookies</a></li>
                     <li><a href="index.php?ctl=contacto">Contacto</a></li>
                   </ul>
                   </div><!-- /.navbar-collapse -->
